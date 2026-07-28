@@ -3,7 +3,7 @@
    for everything else, including the opaque Google Fonts responses so the
    Fraunces/Manrope pairing survives offline. Bump VERSION to ship an update. */
 
-var VERSION = 'calc-v4';
+var VERSION = 'calc-v5';
 var SHELL = [
   './',
   'index.html',
