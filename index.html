@@ -29,8 +29,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
-  :root{--bg:#eef0f2;--surface:#fff;--border:#e3e5e9;--text:#15171a;--text-dim:#7c828c;--btn:#fbfbfc;--btn-fn:#eceef1;--btn-op:#e4e7eb;--btn-eq:#15171a;--btn-eq-text:#fbfbfc;--shadow-card:0 1px 2px rgba(20,23,28,.05),0 24px 60px -28px rgba(20,23,28,.28),inset 0 1px 0 rgba(255,255,255,.6);--shadow-btn:inset 0 1px 0 rgba(255,255,255,.7),0 1px 2px rgba(20,23,28,.06);--shadow-btn-hover:0 4px 14px -6px rgba(20,23,28,.25);--grain-op:.05;--vignette:rgba(20,23,28,.06);--bloom-a:rgba(20,23,28,.045);--bloom-b:rgba(20,23,28,.035);--focus:#9aa0aa;--card-w:316px;--card-r:24px;--pad-x:14px;--gap:10px;--key-h:52px;--key-r:14px;--val-fs:46px}
-  html[data-theme="dark"]{--bg:#0d0e10;--surface:#15171b;--border:#262a30;--text:#f2f3f5;--text-dim:#8a909a;--btn:#1c1f24;--btn-fn:#23272d;--btn-op:#2a2f36;--btn-eq:#f2f3f5;--btn-eq-text:#101215;--shadow-card:0 1px 2px rgba(0,0,0,.5),0 30px 70px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.04);--shadow-btn:inset 0 1px 0 rgba(255,255,255,.03),0 1px 2px rgba(0,0,0,.4);--shadow-btn-hover:0 6px 18px -8px rgba(0,0,0,.7);--grain-op:.07;--vignette:rgba(0,0,0,.5);--bloom-a:rgba(255,255,255,.045);--bloom-b:rgba(255,255,255,.03);--focus:#5a606a}
+  :root{--bg:#eef0f2;--surface:#fff;--border:#e3e5e9;--text:#15171a;--text-dim:#7c828c;--btn:#fbfbfc;--btn-fn:#eceef1;--btn-op:#e4e7eb;--btn-eq:#15171a;--btn-eq-text:#fbfbfc;--accent:#d9622b;--accent-text:#fff;--util-bg:color-mix(in srgb,var(--accent) 14%,var(--btn-fn));--util-text:var(--accent);--shadow-card:0 1px 2px rgba(20,23,28,.05),0 24px 60px -28px rgba(20,23,28,.28),inset 0 1px 0 rgba(255,255,255,.6);--shadow-btn:inset 0 1px 0 rgba(255,255,255,.7),0 1px 2px rgba(20,23,28,.06);--shadow-btn-hover:0 4px 14px -6px rgba(20,23,28,.25);--grain-op:.05;--vignette:rgba(20,23,28,.06);--bloom-a:rgba(20,23,28,.045);--bloom-b:rgba(20,23,28,.035);--focus:#9aa0aa;--card-w:316px;--card-r:24px;--pad-x:14px;--gap:10px;--key-h:52px;--key-r:14px;--val-fs:46px}
+  html[data-theme="dark"]{--bg:#0d0e10;--surface:#15171b;--border:#262a30;--text:#f2f3f5;--text-dim:#8a909a;--btn:#1c1f24;--btn-fn:#23272d;--btn-op:#2a2f36;--btn-eq:#f2f3f5;--btn-eq-text:#101215;--accent:#f0883e;--accent-text:#1b1206;--util-bg:color-mix(in srgb,var(--accent) 16%,var(--btn-fn));--util-text:var(--accent);--shadow-card:0 1px 2px rgba(0,0,0,.5),0 30px 70px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.04);--shadow-btn:inset 0 1px 0 rgba(255,255,255,.03),0 1px 2px rgba(0,0,0,.4);--shadow-btn-hover:0 6px 18px -8px rgba(0,0,0,.7);--grain-op:.07;--vignette:rgba(0,0,0,.5);--bloom-a:rgba(255,255,255,.045);--bloom-b:rgba(255,255,255,.03);--focus:#5a606a}
   *,*::before,*::after{box-sizing:border-box}html{height:100%}
   body{margin:0;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 18px;background:var(--bg);color:var(--text);font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overscroll-behavior:none;transition:background-color .45s,color .45s}
   .ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
@@ -48,22 +48,22 @@
   .brand{display:flex;align-items:center;gap:8px}
   .mark{width:17px;height:17px;color:var(--text-dim);transition:color .45s}
   .wordmark{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:18px;letter-spacing:.01em;line-height:1}
+  .actions{display:flex;align-items:center;gap:8px}
   .theme{display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid var(--border);border-radius:11px;background:var(--btn-fn);color:var(--text);cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1),background-color .3s,border-color .45s,color .45s}
   .theme:hover{background:var(--btn-op);transform:rotate(14deg)}.theme:active{transform:rotate(-8deg) scale(.92)}.theme:focus{outline:none}.theme:focus-visible{outline:2px solid var(--focus);outline-offset:2px}.theme svg{width:17px;height:17px}
   html[data-theme="light"] .icon-sun{display:none}html[data-theme="light"] .icon-moon{display:block}html[data-theme="dark"] .icon-sun{display:block}html[data-theme="dark"] .icon-moon{display:none}
   .moderail{flex:none;position:relative;display:flex;width:auto;margin:0 0 12px;padding:3px;background:var(--btn-fn);border:1px solid var(--border);border-radius:12px;transition:background-color .45s,border-color .45s}
   .seg{position:relative;z-index:1;flex:1 1 0;border:0;background:transparent;padding:7px 4px;border-radius:9px;font:600 11.5px/1 'Manrope';letter-spacing:.01em;color:var(--text-dim);cursor:pointer;transition:color .3s}
   .seg.on{color:var(--btn-eq-text)}.seg:focus{outline:none}.seg:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
-  .seg-ind{position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/3);border-radius:9px;background:var(--btn-eq);transform:translateX(0);transition:transform .42s cubic-bezier(.2,.8,.2,1),background-color .45s;z-index:0}
+  .seg-ind{position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/4);border-radius:9px;background:var(--btn-eq);transform:translateX(0);transition:transform .42s cubic-bezier(.2,.8,.2,1),background-color .45s;z-index:0}
   .deck{flex:1 1 auto;position:relative;overflow:hidden;min-height:0;touch-action:pan-y}
-  .track{display:flex;width:300%;height:100%;transition:transform .42s cubic-bezier(.2,.8,.2,1);will-change:transform}
+  .track{display:flex;width:400%;height:100%;transition:transform .42s cubic-bezier(.2,.8,.2,1);will-change:transform}
   .track.dragging{transition:none}
-  .panel{width:33.3333%;flex:none;display:flex;flex-direction:column;min-height:0;padding:0 1px}
+  .panel{width:25%;flex:none;display:flex;flex-direction:column;min-height:0;padding:0 1px}
   .display{flex:1 1 auto;min-height:84px;display:flex;flex-direction:column;justify-content:flex-end;padding:4px 2px 14px;margin-bottom:14px;border-bottom:1px solid var(--border);transition:border-color .45s}
   .expr{min-height:16px;line-height:16px;text-align:right;font-size:13px;font-weight:500;letter-spacing:.03em;color:var(--text-dim);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .45s}
   .value{display:flex;align-items:flex-end;justify-content:flex-end;min-height:48px;padding:8px 0 2px;text-align:right;font-family:'Fraunces',serif;font-weight:300;font-size:var(--val-fs);line-height:1.02;letter-spacing:-.01em;color:var(--text);font-optical-sizing:auto;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;overflow:hidden;-webkit-touch-callout:none;cursor:default;transition:color .45s}
   .value.error{font-style:italic;opacity:.65}
-  /* pro control strip — one cohesive bar, hairline dividers, full-strength ink */
   .ptool{flex:none;position:relative;display:flex;align-items:center;gap:0;margin:0 0 12px;padding:3px;border:1px solid var(--border);border-radius:12px;background:var(--btn-fn);transition:background-color .45s,border-color .45s}
   .pill{position:relative;flex:1 1 0;height:30px;min-width:0;border:0;border-radius:9px;background:transparent;color:var(--text);font:600 10.5px/1 'Manrope';letter-spacing:.02em;cursor:pointer;transition:background-color .3s,color .3s}
   .pill + .pill::before{content:"";position:absolute;left:0;top:24%;bottom:24%;width:1px;background:var(--border);transition:opacity .3s}
@@ -77,18 +77,24 @@
   .mbadge{position:absolute;top:0;right:2px;font:700 10px/1 'Manrope';letter-spacing:.08em;color:var(--text-dim);opacity:0;transition:opacity .3s}.mbadge.on{opacity:1}
   .pbig{display:flex;align-items:flex-end;justify-content:flex-end;min-height:32px;text-align:right;font-family:'Fraunces',serif;font-weight:400;font-size:30px;line-height:1.05;letter-spacing:-.01em;color:var(--text);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;overflow:hidden;-webkit-touch-callout:none;cursor:default;transition:color .45s}
   .pbig.error{font-style:italic;opacity:.65}
-  .psmall{min-height:16px;line-height:16px;margin-top:6px;text-align:right;font-size:13px;font-weight:500;letter-spacing:.03em;color:var(--text-dim);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .45s}
+  .psmall{min-height:16px;line-height:16px;margin-top:6px;text-align:right;font-size:12px;font-weight:500;letter-spacing:.03em;color:var(--text-dim);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .45s}
   .pad{flex:none;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
   .panel.pro .pad{grid-template-columns:repeat(5,1fr);--key-h:42px;--gap:7px;--key-r:12px}
+  .panel.prog .pad{grid-template-columns:repeat(6,1fr);--key-h:40px;--gap:6px;--key-r:11px}
   .key{position:relative;overflow:hidden;height:var(--key-h);padding:0;border:1px solid var(--border);border-radius:var(--key-r);background:var(--btn);color:var(--text);font-family:'Manrope',sans-serif;font-size:19px;font-weight:500;line-height:1;cursor:pointer;box-shadow:var(--shadow-btn);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .12s,background-color .35s,color .35s,border-color .45s,box-shadow .3s;animation:pop .5s cubic-bezier(.2,.8,.2,1) backwards}
   @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
   .key:hover{transform:translateY(-1px);box-shadow:var(--shadow-btn-hover)}.key:active,.key.press{transform:translateY(0) scale(.94)}.key:focus{outline:none}.key:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
   .klabel{display:inline-block}.key.flip .klabel{animation:flip .3s}
   @keyframes flip{0%{transform:rotateX(0);opacity:1}49%{transform:rotateX(-90deg);opacity:0}50%{transform:rotateX(90deg);opacity:0}100%{transform:rotateX(0);opacity:1}}
   .key.fn{background:var(--btn-fn);font-size:16px;font-weight:600;letter-spacing:.01em}.panel.pro .key.fn{font-size:14px}
-  .key.op{background:var(--btn-op);font-size:22px;font-weight:600}.key.eq{background:var(--btn-eq);color:var(--btn-eq-text);font-size:23px;font-weight:600}
-  .key.wide{grid-column:span 2}.key.tall{grid-row:span 2;height:auto}
-  .key.op.armed,.key.on{background:var(--btn-eq);color:var(--btn-eq-text);box-shadow:inset 0 0 0 1px var(--focus);transform:translateY(0) scale(.97)}
+  .key.util{background:var(--util-bg);color:var(--util-text);font-size:16px;font-weight:600;letter-spacing:.01em;border-color:transparent}.panel.pro .key.util{font-size:14px}.panel.prog .key.util{font-size:12px}
+  .key.op{background:var(--accent);color:var(--accent-text);font-size:22px;font-weight:600;border-color:transparent}.panel.pro .key.op{font-size:19px}.panel.prog .key.op{font-size:16px}
+  .key.eq{background:var(--accent);color:var(--accent-text);font-size:23px;font-weight:600;border-color:transparent}.panel.prog .key.eq{font-size:18px}
+  .key.op.armed{background:var(--btn);color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent);transform:translateY(0) scale(.97)}
+  .key.on{background:var(--accent);color:var(--accent-text);box-shadow:none;transform:translateY(0) scale(.97)}
+  .key.wide{grid-column:span 2}.key.w2{grid-column:span 2}.key.w3{grid-column:span 3}.key.tall{grid-row:span 2;height:auto}
+  .key.dis{opacity:.26;cursor:not-allowed}.key.dis:hover{transform:none;box-shadow:var(--shadow-btn)}
+  .panel.prog .key{font-size:15px}
   .ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.16;transform:scale(0);pointer-events:none;animation:rip .55s ease-out forwards}@keyframes rip{to{transform:scale(2.4);opacity:0}}
   /* convert */
   .chips{flex:none;display:flex;gap:7px;overflow-x:auto;padding:2px 2px 12px;margin:0 -2px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
@@ -119,7 +125,7 @@
   .install{display:none;border:1px solid var(--border);border-radius:999px;background:var(--btn-fn);color:var(--text);padding:5px 11px;font:600 9.5px/1 'Manrope';letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background-color .3s,border-color .45s,color .45s}.install.show{display:inline-block}.install:hover{background:var(--btn-op)}
   .drawer{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .3s}.drawer.open{opacity:1;pointer-events:auto}
   .dbd{position:absolute;inset:0;background:rgba(10,12,15,.34);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}html[data-theme="dark"] .dbd{background:rgba(0,0,0,.5)}
-  .sheet{position:relative;max-height:80%;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-bottom:0;border-radius:20px 20px 0 0;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 14px);box-shadow:0 -20px 50px -24px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}.drawer.open .sheet{transform:translateY(0)}
+  .sheet{position:relative;max-height:82%;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-bottom:0;border-radius:20px 20px 0 0;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 14px);box-shadow:0 -20px 50px -24px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .4s cubic-bezier(.2,.8,.2,1)}.drawer.open .sheet{transform:translateY(0)}
   .shead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.shead span{font-family:'Fraunces',serif;font-style:italic;font-size:16px}
   .shead button{border:0;background:transparent;color:var(--text-dim);font:600 10px/1 'Manrope';letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
   .slist{overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:2px}
@@ -127,12 +133,15 @@
   .hrow .he{font-size:12px;color:var(--text-dim);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .hrow .hr{font-family:'Fraunces',serif;font-size:19px;font-weight:400;text-align:right;font-variant-numeric:tabular-nums}
   .hempty{padding:24px 8px;text-align:center;color:var(--text-dim);font-size:12px;letter-spacing:.04em}
-  /* install sheet */
   .ihow{list-style:none;display:flex;flex-direction:column;gap:11px;margin:2px 0 8px;padding:0}
   .ihow li{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--text)}
   .ihow .n{flex:none;display:grid;place-items:center;width:21px;height:21px;border-radius:7px;background:var(--btn-fn);border:1px solid var(--border);font:700 10px/1 'Manrope';color:var(--text-dim)}
-  .inote{padding-top:6px;border-top:1px solid var(--border);font-size:11px;line-height:1.5;letter-spacing:.02em;color:var(--text-dim)}
-  /* graph */
+  .inote{padding-top:8px;margin-top:4px;border-top:1px solid var(--border);font-size:11px;line-height:1.5;letter-spacing:.02em;color:var(--text-dim)}
+  .setrow{display:flex;align-items:center;justify-content:space-between;padding:11px 2px;font-size:13px;color:var(--text)}
+  .sw{position:relative;width:44px;height:26px;flex:none;border-radius:999px;border:1px solid var(--border);background:var(--btn-op);cursor:pointer;transition:background-color .3s,border-color .3s}
+  .sw::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.3);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .sw.on{background:var(--accent);border-color:transparent}.sw.on::after{transform:translateX(18px)}
+  .sw:focus{outline:none}.sw:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
   .geq{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--text);margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.geq b{font-style:normal;font-weight:400;color:var(--text-dim);margin-right:4px}
   #gExpr{width:100%;border:1px solid var(--border);border-radius:12px;background:var(--btn);color:var(--text);font-family:'Fraunces',serif;font-size:18px;padding:10px 12px;margin-bottom:9px;font-variant-numeric:tabular-nums}#gExpr:focus{outline:none;border-color:var(--focus)}
   .gchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
@@ -142,8 +151,8 @@
   .grange{flex:1 1 auto;text-align:center;font:500 11px/1 'Manrope';letter-spacing:.03em;color:var(--text-dim);font-variant-numeric:tabular-nums}
   #gCanvas{width:100%;height:178px;display:block;border:1px solid var(--border);border-radius:14px;background:var(--btn)}
   .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 26px);transform:translate(-50%,12px);z-index:9;padding:9px 16px;border-radius:999px;background:var(--text);color:var(--surface);font-size:12px;font-weight:600;letter-spacing:.04em;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s cubic-bezier(.2,.8,.2,1)}.toast.show{opacity:1;transform:translate(-50%,0)}
-  @media (max-width:520px){body{align-items:stretch;padding:calc(env(safe-area-inset-top,0px) + 12px) calc(env(safe-area-inset-right,0px) + 12px) calc(env(safe-area-inset-bottom,0px) + 12px) calc(env(safe-area-inset-left,0px) + 12px)}.stage{width:100%;max-width:440px;margin:0 auto;display:flex}.calc{flex:1;--card-r:26px;--pad-x:16px;--gap:11px;--key-h:58px;--val-fs:60px}.panel.pro .pad{--key-h:47px;--gap:8px}.display{min-height:90px}.pbig{font-size:32px}.pill{height:34px}}
-  @media (max-height:620px){.calc{--key-h:42px;--gap:8px;--card-r:20px;padding:10px 12px 8px}.panel.pro .pad{--key-h:37px;--gap:6px}.top{padding-bottom:8px}.moderail{margin-bottom:8px}.display{min-height:50px;padding-bottom:8px;margin-bottom:8px;--val-fs:34px}.pdisp{min-height:52px;padding-bottom:8px;margin-bottom:8px}.pbig{font-size:25px}.ptool{margin-bottom:7px}.plate{margin-top:8px;padding-top:6px}}
+  @media (max-width:520px){body{align-items:stretch;padding:calc(env(safe-area-inset-top,0px) + 12px) calc(env(safe-area-inset-right,0px) + 12px) calc(env(safe-area-inset-bottom,0px) + 12px) calc(env(safe-area-inset-left,0px) + 12px)}.stage{width:100%;max-width:440px;margin:0 auto;display:flex}.calc{flex:1;--card-r:26px;--pad-x:16px;--gap:11px;--key-h:58px;--val-fs:60px}.panel.pro .pad{--key-h:47px;--gap:8px}.panel.prog .pad{--key-h:46px;--gap:7px}.display{min-height:90px}.pbig{font-size:32px}.pill{height:34px}}
+  @media (max-height:640px){.calc{--key-h:42px;--gap:8px;--card-r:20px;padding:10px 12px 8px}.panel.pro .pad{--key-h:37px;--gap:6px}.panel.prog .pad{--key-h:34px;--gap:5px}.top{padding-bottom:8px}.moderail{margin-bottom:8px}.display{min-height:50px;padding-bottom:8px;margin-bottom:8px;--val-fs:34px}.pdisp{min-height:52px;padding-bottom:8px;margin-bottom:8px}.pbig{font-size:25px}.ptool{margin-bottom:7px}.plate{margin-top:8px;padding-top:6px}}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -157,10 +166,15 @@
           <svg class="mark" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.6"/><rect x="10" y="2" width="6" height="6" rx="1.6"/><rect x="2" y="10" width="6" height="6" rx="1.6"/><rect x="10" y="10" width="6" height="6" rx="1.6"/></svg>
           <span class="wordmark">Calculator</span>
         </div>
-        <button class="theme" id="theme" type="button" aria-label="Toggle colour theme" aria-pressed="false">
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
-        </button>
+        <div class="actions">
+          <button class="theme" id="setBtn" type="button" aria-label="Settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3 14.6H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 9 2.6V2a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 17 4.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+          </button>
+          <button class="theme" id="theme" type="button" aria-label="Toggle colour theme" aria-pressed="false">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+          </button>
+        </div>
       </header>
 
       <div class="moderail" role="tablist" aria-label="Calculator mode">
@@ -168,6 +182,7 @@
         <button class="seg on" id="seg0" role="tab" aria-selected="true">Standard</button>
         <button class="seg" id="seg1" role="tab" aria-selected="false">Pro</button>
         <button class="seg" id="seg2" role="tab" aria-selected="false">Convert</button>
+        <button class="seg" id="seg3" role="tab" aria-selected="false">Prog</button>
       </div>
 
       <div class="deck" id="deck">
@@ -175,7 +190,7 @@
           <section class="panel std" role="tabpanel" aria-label="Standard calculator">
             <div class="display"><div class="expr" id="sExpr" aria-hidden="true"></div><div class="value" id="sValue" role="status" aria-live="polite" title="Hold to copy">0</div></div>
             <div class="pad" id="sPad">
-              <button class="key fn" data-key="AC">AC</button><button class="key fn" data-key="±">±</button><button class="key fn" data-key="%">%</button><button class="key op" data-key="/">÷</button>
+              <button class="key util" data-key="AC">AC</button><button class="key util" data-key="±">±</button><button class="key util" data-key="%">%</button><button class="key op" data-key="/">÷</button>
               <button class="key" data-key="7">7</button><button class="key" data-key="8">8</button><button class="key" data-key="9">9</button><button class="key op" data-key="*">×</button>
               <button class="key" data-key="4">4</button><button class="key" data-key="5">5</button><button class="key" data-key="6">6</button><button class="key op" data-key="-">−</button>
               <button class="key" data-key="1">1</button><button class="key" data-key="2">2</button><button class="key" data-key="3">3</button><button class="key op" data-key="+">+</button>
@@ -204,6 +219,20 @@
               <div class="crel" id="cRel"></div>
             </div>
             <div class="constlist" id="constList" style="display:none"></div>
+          </section>
+
+          <section class="panel prog" role="tabpanel" aria-label="Programmer calculator">
+            <div class="ptool" id="pgTool">
+              <button class="pill on" data-base="10" type="button">DEC</button>
+              <button class="pill" data-base="16" type="button">HEX</button>
+              <button class="pill" data-base="8" type="button">OCT</button>
+              <button class="pill" data-base="2" type="button">BIN</button>
+              <button class="pill" data-word="8" type="button">8</button>
+              <button class="pill" data-word="16" type="button">16</button>
+              <button class="pill on" data-word="32" type="button">32</button>
+            </div>
+            <div class="pdisp"><span class="pcap" id="pgCap">DEC · U32</span><div class="pbig" id="pgBig" role="status" aria-live="polite" title="Hold to copy">0</div><div class="psmall" id="pgSmall" aria-hidden="true"></div></div>
+            <div class="pad" id="pgPad"></div>
           </section>
         </div>
       </div>
@@ -248,6 +277,17 @@
           <div class="inote" id="iNote"></div>
         </div>
       </div>
+
+      <div class="drawer" id="setdrawer" aria-hidden="true">
+        <div class="dbd" data-setclose></div>
+        <div class="sheet">
+          <div class="shead"><span>Settings</span><button id="setClose" type="button">Close</button></div>
+          <div class="setrow"><span>Haptic feedback</span><button class="sw on" id="swHaptic" data-set="haptic" role="switch" aria-checked="true" aria-label="Haptic feedback" type="button"></button></div>
+          <div class="setrow"><span>Key sound</span><button class="sw" id="swSound" data-set="sound" role="switch" aria-checked="false" aria-label="Key sound" type="button"></button></div>
+          <div class="setrow"><span>Digit grouping</span><button class="sw on" id="swGroup" data-set="group" role="switch" aria-checked="true" aria-label="Digit grouping" type="button"></button></div>
+          <div class="inote">Haptics and sound fire on key presses and controls. All preferences are stored on this device only.</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -260,11 +300,36 @@
   var reduceMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   function $(s, p) { return (p || document).querySelector(s); }
   function getCSS(v) { return getComputedStyle(root).getPropertyValue(v).trim(); }
-  function haptic(k) { try { if (!navigator.vibrate) return; if (k === 'eq') navigator.vibrate([10, 30, 18]); else if (k === 'err') navigator.vibrate([30, 40, 30, 40, 30]); else if (k === 'op') navigator.vibrate(12); else navigator.vibrate(7); } catch (e) {} }
+
+  /* settings (persisted) */
+  var settings = { haptic: true, sound: false, group: true };
+  try { var ss = localStorage.getItem('calc-settings-v1'); if (ss) { var o = JSON.parse(ss); if (typeof o.haptic === 'boolean') settings.haptic = o.haptic; if (typeof o.sound === 'boolean') settings.sound = o.sound; if (typeof o.group === 'boolean') settings.group = o.group; } } catch (e) {}
+  function saveSettings() { try { localStorage.setItem('calc-settings-v1', JSON.stringify(settings)); } catch (e) {} }
+
+  /* feedback = haptics + optional sound, both gated by settings */
+  var actx = null;
+  function beep(freq, dur, type, vol) {
+    if (!settings.sound) return;
+    try {
+      if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended') actx.resume();
+      var o = actx.createOscillator(), g = actx.createGain();
+      o.type = type || 'sine'; o.frequency.value = freq;
+      o.connect(g); g.connect(actx.destination);
+      var t = actx.currentTime, d = dur || 0.05, v = vol || 0.035;
+      g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(v, t + 0.004); g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+      o.start(t); o.stop(t + d + 0.02);
+    } catch (e) {}
+  }
+  function haptic(k) {
+    if (settings.haptic) { try { if (navigator.vibrate) { if (k === 'eq') navigator.vibrate([10, 30, 18]); else if (k === 'err') navigator.vibrate([30, 40, 30, 40, 30]); else if (k === 'op') navigator.vibrate(12); else navigator.vibrate(7); } } catch (e) {} }
+    if (settings.sound) { if (k === 'eq') { beep(520, 0.05, 'triangle', 0.04); setTimeout(function () { beep(780, 0.07, 'sine', 0.04); }, 50); } else if (k === 'err') beep(150, 0.13, 'square', 0.05); else if (k === 'op') beep(392, 0.05, 'triangle', 0.04); else beep(660, 0.035, 'sine', 0.03); }
+  }
   function ripple(btn, x, y) { var r = btn.getBoundingClientRect(), size = Math.max(r.width, r.height) * 1.1, cx = (x == null) ? r.width / 2 : x - r.left, cy = (y == null) ? r.height / 2 : y - r.top; var s = document.createElement('span'); s.className = 'ripple'; s.style.width = s.style.height = size + 'px'; s.style.left = (cx - size / 2) + 'px'; s.style.top = (cy - size / 2) + 'px'; btn.appendChild(s); s.addEventListener('animationend', function () { s.remove(); }); }
   function flash(btn) { btn.classList.add('press'); clearTimeout(btn._t); btn._t = setTimeout(function () { btn.classList.remove('press'); }, 130); }
   function fit(el, base, min) { el.style.fontSize = base + 'px'; var max = el.clientWidth, size = base; while (el.scrollWidth > max + 1 && size > min) { size -= 2; el.style.fontSize = size + 'px'; } }
-  function groupInt(s) { return s.replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  function groupInt(s) { if (!settings.group) return s; return s.replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  function groupEvery(s, n) { var pre = ''; if (s.charAt(0) === '-') { pre = '-'; s = s.slice(1); } var out = ''; for (var i = 0; i < s.length; i++) { if (i > 0 && (s.length - i) % n === 0) out += ' '; out += s.charAt(i); } return pre + out; }
   function fmtDisp(str) { if (str === 'Error') return 'Error'; var neg = str.charAt(0) === '-', s = neg ? str.slice(1) : str, d = s.indexOf('.'), i = d === -1 ? s : s.slice(0, d), f = d === -1 ? null : s.slice(d + 1); if (i === '') i = '0'; return (neg ? '−' : '') + groupInt(i) + (f !== null ? '.' + f : ''); }
   function numToStr(n) { if (!Number.isFinite(n)) return 'Error'; if (Object.is(n, -0)) n = 0; var a = Math.abs(n), s = (a !== 0 && (a < 1e-9 || a >= 1e15)) ? n.toExponential(6) : (Math.round(n * 1e12) / 1e12).toString(); if (s.indexOf('e') !== -1) { var p = s.split('e'); s = parseFloat(p[0]).toString() + 'e' + p[1]; } return s; }
   function fmtConv(n) { if (!Number.isFinite(n)) return '—'; if (n === 0) return '0'; var a = Math.abs(n); if (a < 1e-6 || a >= 1e12) return n.toExponential(6).replace(/\.?0+e/, 'e'); return parseFloat(n.toPrecision(10)).toString(); }
@@ -275,8 +340,8 @@
 
   /* persistence */
   var saveT = null;
-  function saveState() { clearTimeout(saveT); saveT = setTimeout(function () { try { localStorage.setItem('calc-state-v3', JSON.stringify({ s: { entry: S.entry, expr: S.expr }, p: { tokens: P.tokens, buf: P.buf, done: P.done, result: P.result, lastExpr: P.lastExpr, mem: P.mem, angle: P.angle, hist: P.hist }, conv: conv, g: gExpr ? gExpr.value : 'sin(x)', mode: currentIndex })); } catch (e) {} }, 400); }
-  function loadState() { try { var r = localStorage.getItem('calc-state-v3'); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+  function saveState() { clearTimeout(saveT); saveT = setTimeout(function () { try { localStorage.setItem('calc-state-v4', JSON.stringify({ s: { entry: S.entry, expr: S.expr }, p: { tokens: P.tokens, buf: P.buf, done: P.done, result: P.result, lastExpr: P.lastExpr, mem: P.mem, angle: P.angle, hist: P.hist, ans: P.ans }, conv: conv, g: gExpr ? gExpr.value : 'sin(x)', pg: { val: PG.val.toString(), base: PG.base, word: PG.word, err: PG.err }, mode: currentIndex })); } catch (e) {} }, 400); }
+  function loadState() { try { var r = localStorage.getItem('calc-state-v4') || localStorage.getItem('calc-state-v3'); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
   var saved = loadState();
 
   /* theme */
@@ -285,28 +350,36 @@
   themeBtn.addEventListener('click', function () { var n = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', n); try { localStorage.setItem('calc-theme', n); } catch (e) {} syncTheme(); haptic('tap'); });
   syncTheme();
 
-  /* ===== sheet stack — the Android back gesture closes the top sheet, not the app ===== */
+  /* settings sheet */
+  var setdrawer = $('#setdrawer');
+  function syncSwitches() { [['swHaptic', 'haptic'], ['swSound', 'sound'], ['swGroup', 'group']].forEach(function (p) { var el = $( '#' + p[0]); el.classList.toggle('on', settings[p[1]]); el.setAttribute('aria-checked', settings[p[1]] ? 'true' : 'false'); }); }
+  setdrawer.addEventListener('click', function (e) { var sw = e.target.closest('.sw'); if (sw) { var k = sw.dataset.set; settings[k] = !settings[k]; saveSettings(); syncSwitches(); haptic('tap'); if (k === 'sound' && settings.sound) beep(700, 0.06, 'sine', 0.04); if (k === 'group') { sRender(false); pRender(); renderConv(); pgRender(); } return; } if (e.target.hasAttribute('data-setclose')) setSheet(setdrawer, false); });
+  $('#setClose').addEventListener('click', function () { setSheet(setdrawer, false); });
+  $('#setBtn').addEventListener('click', function () { setSheet(setdrawer, true); haptic('tap'); });
+  syncSwitches();
+
+  /* sheet stack — the Android back gesture closes the top sheet, not the app */
   var sheetStack = [];
   function sheetOpen(el) { return sheetStack.indexOf(el) > -1; }
   function closeTop() { var el = sheetStack.pop(); if (!el) return; el.classList.remove('open'); el.setAttribute('aria-hidden', 'true'); }
   function setSheet(el, open) {
     if (open === sheetOpen(el)) return;
     if (open) { el.classList.add('open'); el.setAttribute('aria-hidden', 'false'); sheetStack.push(el); try { history.pushState({ sheet: sheetStack.length }, ''); } catch (e) {} }
-    else if (history.state && history.state.sheet) history.back();   /* popstate does the closing */
+    else if (history.state && history.state.sheet) history.back();
     else closeTop();
   }
   window.addEventListener('popstate', function () { if (sheetStack.length) closeTop(); });
   window.addEventListener('keydown', function (e) { if (e.key === 'Escape' && sheetStack.length) { e.preventDefault(); setSheet(sheetStack[sheetStack.length - 1], false); } });
 
-  /* pager (3 panels) */
-  var deck = $('#deck'), track = $('#track'), segInd = $('#segInd'), segs = [$('#seg0'), $('#seg1'), $('#seg2')];
+  /* pager (4 panels) */
+  var deck = $('#deck'), track = $('#track'), segInd = $('#segInd'), segs = [$('#seg0'), $('#seg1'), $('#seg2'), $('#seg3')];
   var currentIndex = 0, suppressClick = false;
   function applyTransform(extra, animate) { track.classList.toggle('dragging', !animate); track.style.transform = 'translateX(' + (-currentIndex * deck.clientWidth + (extra || 0)) + 'px)'; }
-  function setIndex(i, animate) { currentIndex = Math.max(0, Math.min(2, i)); applyTransform(0, animate !== false); segInd.style.transform = 'translateX(' + (currentIndex * 100) + '%)'; segs.forEach(function (s, k) { s.classList.toggle('on', k === currentIndex); s.setAttribute('aria-selected', k === currentIndex ? 'true' : 'false'); }); saveState(); }
+  function setIndex(i, animate) { currentIndex = Math.max(0, Math.min(3, i)); applyTransform(0, animate !== false); segInd.style.transform = 'translateX(' + (currentIndex * 100) + '%)'; segs.forEach(function (s, k) { s.classList.toggle('on', k === currentIndex); s.setAttribute('aria-selected', k === currentIndex ? 'true' : 'false'); }); saveState(); }
   segs.forEach(function (s, k) { s.addEventListener('click', function () { setIndex(k, true); haptic('tap'); }); });
   var drag = null;
-  deck.addEventListener('pointerdown', function (e) { if (e.target.closest('button,input,select,canvas,.value,.pbig,.drawer,.chip,.ccard,.seg,.theme,.gchip,.gbtn')) return; drag = { x: e.clientX, y: e.clientY, t: e.timeStamp, lx: e.clientX, lt: e.timeStamp, axis: null, on: false }; window.addEventListener('pointermove', onMove, { passive: false }); window.addEventListener('pointerup', onUp); });
-  function onMove(e) { if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (!drag.axis) { if (Math.max(Math.abs(dx), Math.abs(dy)) < 6) return; drag.axis = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v'; if (drag.axis === 'v') { drag = null; window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); return; } drag.on = true; } e.preventDefault(); var r = dx; if (currentIndex === 0 && dx > 0) r = dx * 0.3; else if (currentIndex === 2 && dx < 0) r = dx * 0.3; drag.lx = e.clientX; drag.lt = e.timeStamp; applyTransform(r, false); }
+  deck.addEventListener('pointerdown', function (e) { if (e.target.closest('button,input,select,canvas,.value,.pbig,.drawer,.chip,.ccard,.seg,.theme,.gchip,.gbtn,.sw')) return; drag = { x: e.clientX, y: e.clientY, t: e.timeStamp, lx: e.clientX, lt: e.timeStamp, axis: null, on: false }; window.addEventListener('pointermove', onMove, { passive: false }); window.addEventListener('pointerup', onUp); });
+  function onMove(e) { if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (!drag.axis) { if (Math.max(Math.abs(dx), Math.abs(dy)) < 6) return; drag.axis = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v'; if (drag.axis === 'v') { drag = null; window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); return; } drag.on = true; } e.preventDefault(); var r = dx; if (currentIndex === 0 && dx > 0) r = dx * 0.3; else if (currentIndex === 3 && dx < 0) r = dx * 0.3; drag.lx = e.clientX; drag.lt = e.timeStamp; applyTransform(r, false); }
   function onUp(e) { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); if (!drag) return; if (drag.on) { var dx = e.clientX - drag.x, w = deck.clientWidth, dt = Math.max(1, e.timeStamp - drag.lt), v = (e.clientX - drag.lx) / dt, next = currentIndex; if (dx < -w * 0.16 || v < -0.4) next = currentIndex + 1; else if (dx > w * 0.16 || v > 0.4) next = currentIndex - 1; suppressClick = true; setIndex(next, true); } drag = null; }
   deck.addEventListener('click', function (e) { if (suppressClick) { e.preventDefault(); e.stopPropagation(); suppressClick = false; } }, true);
   window.addEventListener('resize', function () { applyTransform(0, false); fitAll(); if (sheetOpen(gdrawer)) plot(false); });
@@ -332,30 +405,30 @@
   var gx = 0;
   function gamma(z) { if (z < 0.5) return Math.PI / (Math.sin(Math.PI * z) * gamma(1 - z)); z -= 1; var g = 7, c = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7]; var x = c[0]; for (var i = 1; i < g + 2; i++) x += c[i] / (z + i); var t = z + g + 0.5; return Math.sqrt(2 * Math.PI) * Math.pow(t, z + 0.5) * Math.exp(-t) * x; }
   function fact(a) { if (a < 0 || a > 170) return NaN; if (Math.abs(a - Math.round(a)) < 1e-9) { var r = 1; for (var i = 2; i <= a; i++) r *= i; return r; } return gamma(a + 1); }
-  function opInfo(o) { return (o === '+' || o === '-') ? { p: 1, r: false } : (o === '*' || o === '/') ? { p: 2, r: false } : { p: 3, r: true }; }
+  function opInfo(o) { return (o === '+' || o === '-' || o === 'mod') ? { p: (o === 'mod' ? 2 : 1), r: false } : (o === '*' || o === '/') ? { p: 2, r: false } : { p: 3, r: true }; }
   function applyFn(f, a) { var d = P.angle === 'DEG', R = Math.PI / 180; switch (f) { case 'sin': return Math.sin(d ? a * R : a); case 'cos': return Math.cos(d ? a * R : a); case 'tan': return Math.tan(d ? a * R : a); case 'asin': return d ? Math.asin(a) / R : Math.asin(a); case 'acos': return d ? Math.acos(a) / R : Math.acos(a); case 'atan': return d ? Math.atan(a) / R : Math.atan(a); case 'ln': return Math.log(a); case 'log': return Math.log10(a); case 'sqrt': return Math.sqrt(a); case 'cbrt': return Math.cbrt(a); case 'exp': return Math.exp(a); case 'tenx': return Math.pow(10, a); case 'abs': return Math.abs(a); } return NaN; }
   function toRPN(tk) { var out = [], ops = [], fns = []; for (var i = 0; i < tk.length; i++) { var t = tk[i]; if (t.t === 'num') out.push({ k: 'n', v: parseFloat(t.s) }); else if (t.t === 'var') out.push({ k: 'var' }); else if (t.t === 'const') out.push({ k: 'n', v: t.c === 'pi' ? Math.PI : Math.E }); else if (t.t === 'post') out.push({ k: 'po', p: t.p }); else if (t.t === 'un') ops.push({ k: 'u', p: 4, r: true }); else if (t.t === 'fn') fns.push(t.f); else if (t.t === 'lp') ops.push({ k: '(' }); else if (t.t === 'rp') { while (ops.length && ops[ops.length - 1].k !== '(') out.push(ops.pop()); if (!ops.length) throw 0; ops.pop(); if (fns.length) out.push({ k: 'f', f: fns.pop() }); } else if (t.t === 'op') { var inf = opInfo(t.o); while (ops.length) { var top = ops[ops.length - 1]; if (top.k === '(') break; if (top.k === 'u') { out.push(ops.pop()); continue; } if (top.k === 'op') { var ti = opInfo(top.o); if ((inf.r ? inf.p < ti.p : inf.p <= ti.p)) out.push(ops.pop()); else break; } else break; } ops.push({ k: 'op', o: t.o, p: inf.p, r: inf.r }); } } while (ops.length) { var x = ops.pop(); if (x.k === '(') throw 0; out.push(x); } if (fns.length) throw 0; return out; }
-  function evalRPN(r) { var st = []; for (var i = 0; i < r.length; i++) { var n = r[i], b, a; if (n.k === 'n') st.push(n.v); else if (n.k === 'var') st.push(gx); else if (n.k === 'po') { a = st.pop(); st.push(n.p === 'sq' ? a * a : n.p === 'cb' ? a * a * a : n.p === 'fact' ? fact(a) : 1 / a); } else if (n.k === 'u') st.push(-st.pop()); else if (n.k === 'f') st.push(applyFn(n.f, st.pop())); else { b = st.pop(); a = st.pop(); st.push(n.o === '+' ? a + b : n.o === '-' ? a - b : n.o === '*' ? a * b : n.o === '/' ? a / b : n.o === 'pow' ? Math.pow(a, b) : Math.pow(b, 1 / a)); } } return st.length === 1 ? st[0] : NaN; }
+  function evalRPN(r) { var st = []; for (var i = 0; i < r.length; i++) { var n = r[i], b, a; if (n.k === 'n') st.push(n.v); else if (n.k === 'var') st.push(gx); else if (n.k === 'po') { a = st.pop(); st.push(n.p === 'sq' ? a * a : n.p === 'cb' ? a * a * a : n.p === 'fact' ? fact(a) : 1 / a); } else if (n.k === 'u') st.push(-st.pop()); else if (n.k === 'f') st.push(applyFn(n.f, st.pop())); else { b = st.pop(); a = st.pop(); st.push(n.o === '+' ? a + b : n.o === '-' ? a - b : n.o === '*' ? a * b : n.o === '/' ? a / b : n.o === 'mod' ? (b === 0 ? NaN : a % b) : n.o === 'pow' ? Math.pow(a, b) : Math.pow(b, 1 / a)); } } return st.length === 1 ? st[0] : NaN; }
 
   /* ===== PRO ===== */
   var proPad = $('#proPad'), proBig = $('#proBig'), proSmall = $('#proSmall'), proM = $('#proM'), proAngle = $('#proAngle'), proHist = $('#proHist'), drawer = $('#drawer'), histList = $('#histList');
-  var FN = ['sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'ln', 'log', 'sqrt', 'cbrt', 'exp', 'tenx'];
+  var FN = ['sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'ln', 'log', 'sqrt', 'cbrt', 'exp', 'tenx', 'abs'];
   var POST = ['sq', 'cb', 'fact', 'recip'];
-  var FNDISP = { sin: 'sin', asin: 'sin⁻¹', cos: 'cos', acos: 'cos⁻¹', tan: 'tan', atan: 'tan⁻¹', ln: 'ln', log: 'log', sqrt: '√', cbrt: '³√', exp: 'e^', tenx: '10^' };
+  var FNDISP = { sin: 'sin', asin: 'sin⁻¹', cos: 'cos', acos: 'cos⁻¹', tan: 'tan', atan: 'tan⁻¹', ln: 'ln', log: 'log', sqrt: '√', cbrt: '³√', exp: 'e^', tenx: '10^', abs: 'abs' };
   var POSTSYM = { sq: '²', cb: '³', fact: '!', recip: '⁻¹' };
-  var PROSYM = { '+': '+', '-': '−', '*': '×', '/': '÷', pow: '^', root: 'ʸ√' };
+  var PROSYM = { '+': '+', '-': '−', '*': '×', '/': '÷', pow: '^', root: 'ʸ√', mod: 'mod' };
   var layout = [
-    [{ c: 'second', l: '2ND', k: 'fn' }, { c: 'sin', l: 'sin', s: 'asin', sl: 'sin⁻¹', k: 'fn' }, { c: 'cos', l: 'cos', s: 'acos', sl: 'cos⁻¹', k: 'fn' }, { c: 'tan', l: 'tan', s: 'atan', sl: 'tan⁻¹', k: 'fn' }, { c: 'pi', l: 'π', k: 'fn' }],
-    [{ c: 'sq', l: 'x²', s: 'cb', sl: 'x³', k: 'fn' }, { c: 'sqrt', l: '√', s: 'cbrt', sl: '³√', k: 'fn' }, { c: 'pow', l: 'xʸ', s: 'root', sl: 'ʸ√x', k: 'fn' }, { c: 'ln', l: 'ln', s: 'log', sl: 'log', k: 'fn' }, { c: 'e', l: 'e', k: 'fn' }],
-    [{ c: 'lp', l: '(', k: 'fn' }, { c: 'rp', l: ')', k: 'fn' }, { c: 'fact', l: 'n!', k: 'fn' }, { c: 'recip', l: '1/x', k: 'fn' }, { c: 'neg', l: '±', k: 'fn' }],
+    [{ c: 'second', l: '2ND', k: 'fn' }, { c: 'sin', l: 'sin', s: 'asin', sl: 'sin⁻¹', k: 'fn' }, { c: 'cos', l: 'cos', s: 'acos', sl: 'cos⁻¹', k: 'fn' }, { c: 'tan', l: 'tan', s: 'atan', sl: 'tan⁻¹', k: 'fn' }, { c: 'pi', l: 'π', s: 'rand', sl: 'rand', k: 'fn' }],
+    [{ c: 'sq', l: 'x²', s: 'cb', sl: 'x³', k: 'fn' }, { c: 'sqrt', l: '√', s: 'cbrt', sl: '³√', k: 'fn' }, { c: 'pow', l: 'xʸ', s: 'root', sl: 'ʸ√x', k: 'fn' }, { c: 'ln', l: 'ln', s: 'exp', sl: 'eˣ', k: 'fn' }, { c: 'e', l: 'e', s: 'ans', sl: 'ANS', k: 'fn' }],
+    [{ c: 'lp', l: '(', k: 'fn' }, { c: 'rp', l: ')', k: 'fn' }, { c: 'fact', l: 'n!', k: 'fn' }, { c: 'recip', l: '1/x', s: 'mod', sl: 'mod', k: 'fn' }, { c: 'neg', l: '±', s: 'abs', sl: '|x|', k: 'fn util' }],
     [{ c: '7', l: '7' }, { c: '8', l: '8' }, { c: '9', l: '9' }, { c: '/', l: '÷', k: 'op' }, { c: 'bs', l: '⌫', k: 'fn' }],
-    [{ c: '4', l: '4' }, { c: '5', l: '5' }, { c: '6', l: '6' }, { c: '*', l: '×', k: 'op' }, { c: 'clr', l: 'AC', k: 'fn' }],
+    [{ c: '4', l: '4' }, { c: '5', l: '5' }, { c: '6', l: '6' }, { c: '*', l: '×', k: 'op' }, { c: 'clr', l: 'AC', k: 'fn util' }],
     [{ c: '1', l: '1' }, { c: '2', l: '2' }, { c: '3', l: '3' }, { c: '-', l: '−', k: 'op' }, { c: 'eq', l: '=', k: 'eq tall' }],
     [{ c: '0', l: '0', k: 'wide' }, { c: '.', l: '.' }, { c: '+', l: '+', k: 'op' }]
   ];
-  (function buildPro() { var html = ''; layout.forEach(function (row) { row.forEach(function (d) { var cls = 'key' + (d.k ? ' ' + d.k : ''); var sec = d.s ? ' data-sec="' + d.s + '" data-sl="' + d.sl + '"' : ''; html += '<button class="' + cls + '" data-code="' + d.c + '"' + sec + '><span class="klabel">' + d.l + '</span></button>'; }); }); proPad.innerHTML = html; })();
+  (function buildPro() { var html = ''; layout.forEach(function (row) { row.forEach(function (d) { var cls = 'key' + (d.k ? ' ' + d.k : ''); var sec = d.s ? ' data-sec="' + d.s + '" data-sl="' + d.sl + '"' : ''; html += '<button class="' + cls + '" data-code="' + d.c + '" data-pl="' + d.l + '"' + sec + '><span class="klabel">' + d.l + '</span></button>'; }); }); proPad.innerHTML = html; })();
 
-  var P = { tokens: [], buf: null, done: false, result: '0', lastExpr: '', second: false, angle: 'DEG', mem: 0, hist: [] };
+  var P = { tokens: [], buf: null, done: false, result: '0', lastExpr: '', second: false, angle: 'DEG', mem: 0, hist: [], ans: null };
   function last() { return P.tokens[P.tokens.length - 1] || null; }
   function vlike(t) { return t && (t.t === 'num' || t.t === 'const' || t.t === 'rp' || t.t === 'post' || t.t === 'var'); }
   function commit() { if (P.buf !== null && P.buf !== '' && P.buf !== '-') { P.tokens.push({ t: 'num', s: P.buf }); P.buf = null; } }
@@ -363,7 +436,7 @@
   function mulForStart() { if (P.buf !== null) { commit(); mul(); } else if (vlike(last())) mul(); }
   function freshIf(co) { if (!P.done) return; if (co) { P.tokens = [{ t: 'num', s: P.result }]; P.buf = null; } else { P.tokens = []; P.buf = null; } P.done = false; }
   function fmtN(s) { return s.charAt(0) === '-' ? '−' + s.slice(1) : s; }
-  function pretty(withBuf) { var s = '', prev = null; P.tokens.forEach(function (tk) { var frag = '', lead = ''; if (tk.t === 'num') { frag = fmtN(tk.s); lead = vlike(prev) ? ' ' : ''; } else if (tk.t === 'const') { frag = tk.c === 'pi' ? 'π' : 'e'; lead = vlike(prev) ? ' ' : ''; } else if (tk.t === 'op') { s += (tk.o === 'pow' ? ' ^ ' : tk.o === 'root' ? ' ʸ√ ' : ' ' + PROSYM[tk.o] + ' '); prev = tk; return; } else if (tk.t === 'lp') { frag = '('; lead = vlike(prev) ? ' ' : ''; } else if (tk.t === 'rp') { frag = ')'; } else if (tk.t === 'fn') { frag = FNDISP[tk.f]; lead = vlike(prev) ? ' ' : ''; } else if (tk.t === 'un') { frag = '−'; } else if (tk.t === 'post') { s += POSTSYM[tk.p]; prev = tk; return; } s += lead + frag; prev = tk; }); if (withBuf && P.buf !== null) { var bf = fmtN(P.buf); s = s === '' ? bf : (vlike(prev) ? s + ' ' + bf : s + bf); } return s === '' ? '0' : s; }
+  function pretty(withBuf) { var s = '', prev = null; P.tokens.forEach(function (tk) { var frag = '', lead = ''; if (tk.t === 'num') { frag = fmtN(tk.s); lead = vlike(prev) ? ' ' : ''; } else if (tk.t === 'const') { frag = tk.c === 'pi' ? 'π' : 'e'; lead = vlike(prev) ? ' ' : ''; } else if (tk.t === 'op') { s += (tk.o === 'pow' ? ' ^ ' : tk.o === 'root' ? ' ʸ√ ' : tk.o === 'mod' ? ' mod ' : ' ' + PROSYM[tk.o] + ' '); prev = tk; return; } else if (tk.t === 'lp') { frag = '('; lead = vlike(prev) ? ' ' : ''; } else if (tk.t === 'rp') { frag = ')'; } else if (tk.t === 'fn') { frag = FNDISP[tk.f]; lead = vlike(prev) ? ' ' : ''; } else if (tk.t === 'un') { frag = '−'; } else if (tk.t === 'post') { s += POSTSYM[tk.p]; prev = tk; return; } s += lead + frag; prev = tk; }); if (withBuf && P.buf !== null) { var bf = fmtN(P.buf); s = s === '' ? bf : (vlike(prev) ? s + ' ' + bf : s + bf); } return s === '' ? '0' : s; }
   function evalList(list) { try { var lp = 0, rp = 0; list.forEach(function (t) { if (t.t === 'lp') lp++; else if (t.t === 'rp') rp++; }); if (rp > lp) return NaN; var tk = list.slice(); for (var i = 0; i < lp - rp; i++) tk.push({ t: 'rp' }); return evalRPN(toRPN(tk)); } catch (e) { return NaN; } }
   function hasOp(list) { return list.some(function (t) { return t.t === 'op' || t.t === 'fn' || t.t === 'post' || t.t === 'un'; }); }
   function preview() { var tk = P.tokens.slice(); if (P.buf !== null && P.buf !== '' && P.buf !== '-') tk.push({ t: 'num', s: P.buf }); if (tk.length && tk[tk.length - 1].t === 'op') tk.pop(); if (!hasOp(tk)) return null; var v = evalList(tk); return Number.isFinite(v) ? v : null; }
@@ -379,13 +452,15 @@
   function pNeg() { freshIf(true); function tog(s) { return (s === '0' || s === '0.') ? s : (s.charAt(0) === '-' ? s.slice(1) : '-' + s); } if (P.buf !== null) P.buf = tog(P.buf); else if (last() && last().t === 'num') last().s = tog(last().s); else P.tokens.push({ t: 'un' }); pRender(); }
   function pBs() { if (P.done) return; if (P.buf !== null) { if (P.buf.length > 1) P.buf = P.buf.slice(0, -1); else P.buf = null; } else if (P.tokens.length) P.tokens.pop(); pRender(); }
   function pClr() { if (P.buf !== null) P.buf = null; else { P.tokens = []; P.done = false; P.result = '0'; P.lastExpr = ''; } pRender(); }
-  function pEq() { if (P.done) return; commit(); var lp = 0, rp = 0; P.tokens.forEach(function (t) { if (t.t === 'lp') lp++; else if (t.t === 'rp') rp++; }); if (rp > lp) { P.done = true; P.result = 'Error'; P.lastExpr = pretty(false); pRender(); haptic('err'); return; } var l = last(); if (l && (l.t === 'op' || l.t === 'lp' || l.t === 'fn' || l.t === 'un')) { P.done = true; P.result = 'Error'; P.lastExpr = pretty(false); pRender(); haptic('err'); return; } var tk = P.tokens.slice(); for (var i = 0; i < lp - rp; i++) tk.push({ t: 'rp' }); var v = evalList(tk), expr = pretty(false); P.lastExpr = expr; P.done = true; if (Number.isFinite(v)) { P.result = numToStr(v); P.hist.unshift({ e: expr, r: P.result }); if (P.hist.length > 40) P.hist.pop(); } else { P.result = 'Error'; haptic('err'); } P.tokens = []; P.buf = null; pRender(); renderHist(); }
+  function pRand() { freshIf(false); mulForStart(); P.tokens.push({ t: 'num', s: String(Math.random()) }); P.buf = null; pRender(); }
+  function pAns() { var a = P.ans != null ? P.ans : (P.done ? P.result : numToStr(curVal())); freshIf(false); mulForStart(); P.tokens.push({ t: 'num', s: a }); P.buf = null; P.done = false; pRender(); }
+  function pEq() { if (P.done) return; commit(); var lp = 0, rp = 0; P.tokens.forEach(function (t) { if (t.t === 'lp') lp++; else if (t.t === 'rp') rp++; }); if (rp > lp) { P.done = true; P.result = 'Error'; P.lastExpr = pretty(false); pRender(); haptic('err'); return; } var l = last(); if (l && (l.t === 'op' || l.t === 'lp' || l.t === 'fn' || l.t === 'un')) { P.done = true; P.result = 'Error'; P.lastExpr = pretty(false); pRender(); haptic('err'); return; } var tk = P.tokens.slice(); for (var i = 0; i < lp - rp; i++) tk.push({ t: 'rp' }); var v = evalList(tk), expr = pretty(false); P.lastExpr = expr; P.done = true; if (Number.isFinite(v)) { P.result = numToStr(v); P.ans = P.result; P.hist.unshift({ e: expr, r: P.result }); if (P.hist.length > 40) P.hist.pop(); } else { P.result = 'Error'; haptic('err'); } P.tokens = []; P.buf = null; pRender(); renderHist(); }
   function pMem(m) { var c = curVal(); if (m === 'mc') P.mem = 0; else if (m === 'mplus') P.mem += c; else if (m === 'mminus') P.mem -= c; else if (m === 'mr') { freshIf(false); mulForStart(); P.tokens.push({ t: 'num', s: numToStr(P.mem) }); P.buf = null; P.done = false; } pRender(); }
   function pInsert(s) { freshIf(false); mulForStart(); P.tokens.push({ t: 'num', s: s }); P.buf = null; P.done = false; pRender(); }
-  function pAct(code) { if (code.length === 1 && code >= '0' && code <= '9') pDigit(code); else if (code === '.') pDot(); else if (code === '+' || code === '-' || code === '*' || code === '/' || code === 'pow' || code === 'root') pBin(code); else if (FN.indexOf(code) !== -1) pFn(code); else if (code === 'pi' || code === 'e') pConst(code); else if (POST.indexOf(code) !== -1) pPost(code); else if (code === 'lp') pLP(); else if (code === 'rp') pRP(); else if (code === 'neg') pNeg(); else if (code === 'bs') pBs(); else if (code === 'clr') pClr(); else if (code === 'eq') pEq(); else if (code === 'second') toggleSecond(); else if (code === 'mc' || code === 'mr' || code === 'mplus' || code === 'mminus') pMem(code); }
+  function pAct(code) { if (code.length === 1 && code >= '0' && code <= '9') pDigit(code); else if (code === '.') pDot(); else if (code === '+' || code === '-' || code === '*' || code === '/' || code === 'pow' || code === 'root' || code === 'mod') pBin(code); else if (FN.indexOf(code) !== -1) pFn(code); else if (code === 'pi' || code === 'e') pConst(code); else if (POST.indexOf(code) !== -1) pPost(code); else if (code === 'lp') pLP(); else if (code === 'rp') pRP(); else if (code === 'neg') pNeg(); else if (code === 'bs') pBs(); else if (code === 'clr') pClr(); else if (code === 'eq') pEq(); else if (code === 'second') toggleSecond(); else if (code === 'rand') pRand(); else if (code === 'ans') pAns(); else if (code === 'abs') pFn('abs'); else if (code === 'mc' || code === 'mr' || code === 'mplus' || code === 'mminus') pMem(code); }
   function pHandle(tok) { if (tok.length === 1 && tok >= '0' && tok <= '9') pDigit(tok); else if (tok === '.') pDot(); else if (tok === '+' || tok === '-' || tok === '*' || tok === '/') pBin(tok); else if (tok === '=') pEq(); else if (tok === 'AC') pClr(); else if (tok === 'BS') pBs(); else if (tok === '±') pNeg(); }
-  function pKind(c) { return c === 'eq' ? 'eq' : (c === '+' || c === '-' || c === '*' || c === '/' || c === 'pow' || c === 'root' || FN.indexOf(c) !== -1 || POST.indexOf(c) !== -1 || c === 'neg' || c === 'mc' || c === 'mr' || c === 'mplus' || c === 'mminus') ? 'op' : 'tap'; }
-  function toggleSecond() { P.second = !P.second; proPad.querySelectorAll('[data-sec]').forEach(function (b) { var lbl = b.querySelector('.klabel'), on = P.second; lbl.textContent = on ? b.getAttribute('data-sl') : ({ sin: 'sin', cos: 'cos', tan: 'tan', sq: 'x²', sqrt: '√', pow: 'xʸ', ln: 'ln' })[b.dataset.code] || lbl.textContent; b.classList.add('flip'); setTimeout(function () { b.classList.remove('flip'); }, 300); }); var k = proPad.querySelector('[data-code="second"]'); if (k) k.classList.toggle('on', P.second); haptic('op'); }
+  function pKind(c) { return c === 'eq' ? 'eq' : (c === '+' || c === '-' || c === '*' || c === '/' || c === 'pow' || c === 'root' || c === 'mod' || FN.indexOf(c) !== -1 || POST.indexOf(c) !== -1 || c === 'neg' || c === 'abs' || c === 'rand' || c === 'ans' || c === 'mc' || c === 'mr' || c === 'mplus' || c === 'mminus') ? 'op' : 'tap'; }
+  function toggleSecond() { P.second = !P.second; proPad.querySelectorAll('[data-sec]').forEach(function (b) { var lbl = b.querySelector('.klabel'); lbl.textContent = P.second ? b.getAttribute('data-sl') : b.getAttribute('data-pl'); b.classList.add('flip'); setTimeout(function () { b.classList.remove('flip'); }, 300); }); var k = proPad.querySelector('[data-code="second"]'); if (k) k.classList.toggle('on', P.second); haptic('op'); }
   function toggleAngle() { P.angle = P.angle === 'DEG' ? 'RAD' : 'DEG'; proAngle.textContent = P.angle; proAngle.classList.toggle('on', P.angle === 'RAD'); pRender(); haptic('op'); }
   function renderHist() { if (!P.hist.length) { histList.innerHTML = '<div class="hempty">No calculations yet</div>'; return; } histList.innerHTML = P.hist.map(function (h, i) { return '<div class="hrow" data-i="' + i + '"><span class="he">' + h.e + ' =</span><span class="hr">' + fmtDisp(h.r) + '</span></div>'; }).join(''); }
   function toggleDrawer(open) { setSheet(drawer, open == null ? !sheetOpen(drawer) : open); }
@@ -395,7 +470,7 @@
   proAngle.addEventListener('click', toggleAngle);
   proHist.addEventListener('click', function () { toggleDrawer(); haptic('tap'); });
   proPad.querySelectorAll('.pm').forEach(function (b) { b.addEventListener('click', function () { pMem(b.dataset.m); haptic('op'); }); });
-  function proBase(){var w=window.innerWidth,h=window.innerHeight;if(h<=620)return 24;return w<=360?34:w<=520?40:32;}
+  function proBase(){var w=window.innerWidth,h=window.innerHeight;if(h<=640)return 24;return w<=360?34:w<=520?40:32;}
   function pRender() { var big, small; if (P.done) { big = fmtDisp(P.result); small = P.lastExpr ? P.lastExpr + ' =' : ''; } else { big = pretty(true); var pv = preview(); small = pv !== null ? '= ' + fmtDisp(numToStr(pv)) : ''; } proBig.textContent = big; proSmall.textContent = small; proBig.classList.toggle('error', P.result === 'Error' && P.done); fit(proBig, proBase(), 14); var clr = proPad.querySelector('[data-code="clr"]'); if (clr) clr.querySelector('.klabel').textContent = P.buf !== null ? 'C' : 'AC'; proM.classList.toggle('on', P.mem !== 0); if (proBig.animate && P.done) proBig.animate([{ opacity: .4, transform: 'translateY(3px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 170, easing: 'cubic-bezier(.2,.8,.2,1)' }); saveState(); }
 
   /* ===== CONVERT ===== */
@@ -418,9 +493,66 @@
   convChips.addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (b) { setCat(b.dataset.cat); haptic('tap'); } });
   constList.addEventListener('click', function (e) { var b = e.target.closest('.ccard'); if (b) copyText(b.dataset.v); });
   cVal.addEventListener('input', function () { conv.val = cVal.value; renderConv(); });
-  cFrom.addEventListener('change', function () { conv.from = cFrom.value; renderConv(); });
-  cTo.addEventListener('change', function () { conv.to = cTo.value; renderConv(); });
+  cFrom.addEventListener('change', function () { conv.from = cFrom.value; renderConv(); haptic('tap'); });
+  cTo.addEventListener('change', function () { conv.to = cTo.value; renderConv(); haptic('tap'); });
   cSwap.addEventListener('click', function () { var t = conv.from; conv.from = conv.to; conv.to = t; buildSelects(); renderConv(); haptic('op'); });
+
+  /* ===== PROGRAMMER ===== */
+  var pgPad = $('#pgPad'), pgBig = $('#pgBig'), pgSmall = $('#pgSmall'), pgCap = $('#pgCap'), pgTool = $('#pgTool');
+  var PG = { val: 0n, base: 10, word: 32, err: false, first: null, op: null, wait: false, done: false };
+  var BN = { 10: 'DEC', 16: 'HEX', 8: 'OCT', 2: 'BIN' };
+  var pgLayout = [
+    [{ c: 'ac', l: 'AC', k: 'util' }, { c: 'neg', l: '±', k: 'util' }, { c: 'not', l: 'NOT', k: 'util' }, { c: 'bs', l: '⌫', k: 'util' }, { c: '/', l: '÷', k: 'op' }, { c: '*', l: '×', k: 'op' }],
+    [{ c: 'd10', l: 'A', k: 'dg' }, { c: 'd11', l: 'B', k: 'dg' }, { c: 'd12', l: 'C', k: 'dg' }, { c: 'd13', l: 'D', k: 'dg' }, { c: '-', l: '−', k: 'op' }, { c: '+', l: '+', k: 'op' }],
+    [{ c: 'd14', l: 'E', k: 'dg' }, { c: 'd15', l: 'F', k: 'dg' }, { c: 'd7', l: '7', k: 'dg' }, { c: 'd8', l: '8', k: 'dg' }, { c: 'mod', l: 'mod', k: 'op' }, { c: '&', l: 'AND', k: 'util' }],
+    [{ c: 'd9', l: '9', k: 'dg' }, { c: 'd4', l: '4', k: 'dg' }, { c: 'd5', l: '5', k: 'dg' }, { c: 'd6', l: '6', k: 'dg' }, { c: '|', l: 'OR', k: 'util' }, { c: '^', l: 'XOR', k: 'util' }],
+    [{ c: 'd1', l: '1', k: 'dg' }, { c: 'd2', l: '2', k: 'dg' }, { c: 'd3', l: '3', k: 'dg' }, { c: 'd0', l: '0', k: 'dg w2' }, { c: '=', l: '=', k: 'eq' }],
+    [{ c: '<<', l: 'LSH', k: 'util w3' }, { c: '>>', l: 'RSH', k: 'util w3' }]
+  ];
+  (function buildProg() { var html = ''; pgLayout.forEach(function (row) { row.forEach(function (d) { html += '<button class="key ' + d.k + '" data-c="' + d.c + '"><span class="klabel">' + d.l + '</span></button>'; }); }); pgPad.innerHTML = html; })();
+  function pgMask() { return (1n << BigInt(PG.word)) - 1n; }
+  function pgNorm(x) { var M = 1n << BigInt(PG.word); var r = x % M; return r < 0n ? r + M : r; }
+  function pgSigned() { var half = 1n << BigInt(PG.word - 1); return PG.val >= half ? PG.val - (1n << BigInt(PG.word)) : PG.val; }
+  function pgCompute(first, op, cur) {
+    function s(x) { var half = 1n << BigInt(PG.word - 1); return x >= half ? x - (1n << BigInt(PG.word)) : x; }
+    var r;
+    if (op === '&') r = first & cur; else if (op === '|') r = first | cur; else if (op === '^') r = first ^ cur;
+    else if (op === '<<') r = first << (cur & BigInt(PG.word - 1)); else if (op === '>>') r = first >> (cur & BigInt(PG.word - 1));
+    else if (op === '+') r = pgNorm(s(first) + s(cur)); else if (op === '-') r = pgNorm(s(first) - s(cur)); else if (op === '*') r = pgNorm(s(first) * s(cur));
+    else if (op === '/') { var b = s(cur); if (b === 0n) return null; r = pgNorm(s(first) / b); }
+    else if (op === 'mod') { var b2 = s(cur); if (b2 === 0n) return null; r = pgNorm(s(first) % b2); }
+    else r = cur;
+    return r & pgMask();
+  }
+  function pgDigit(v) { if (PG.err) { PG.err = false; PG.val = 0n; } if (v >= PG.base) { haptic('err'); return; } if (PG.done) { PG.val = 0n; PG.first = null; PG.op = null; PG.done = false; } if (PG.wait) { PG.val = BigInt(v); PG.wait = false; pgRender(); return; } var nv = PG.val * BigInt(PG.base) + BigInt(v); if (nv > pgMask()) { haptic('err'); return; } PG.val = nv; pgRender(); }
+  function pgOp(o) { if (PG.err) return; if (PG.done) { PG.first = null; PG.op = null; PG.done = false; } var cur = PG.val; if (PG.op !== null && !PG.wait && PG.first !== null) { var r = pgCompute(PG.first, PG.op, cur); if (r === null) { PG.err = true; PG.op = null; PG.first = null; pgRender(); haptic('err'); return; } PG.first = r; } else if (PG.first === null) PG.first = cur; PG.op = o; PG.wait = true; pgRender(); }
+  function pgEq() { if (PG.err || PG.op === null || PG.first === null) return; var r = pgCompute(PG.first, PG.op, PG.val); if (r === null) { PG.err = true; haptic('err'); } else PG.val = r; PG.first = null; PG.op = null; PG.wait = false; PG.done = true; pgRender(); }
+  function pgAc() { PG.val = 0n; PG.first = null; PG.op = null; PG.wait = false; PG.err = false; PG.done = false; pgRender(); }
+  function pgNot() { if (PG.err) return; PG.val = pgNorm(~PG.val); PG.done = false; pgRender(); }
+  function pgNeg() { if (PG.err) return; PG.val = pgNorm(-pgSigned()); PG.done = false; pgRender(); }
+  function pgBs() { if (PG.err) { pgAc(); return; } if (PG.wait) return; PG.val = PG.val / BigInt(PG.base); pgRender(); }
+  function pgSetBase(b) { PG.base = b; pgRender(); haptic('tap'); }
+  function pgSetWord(w) { PG.word = w; PG.val = pgNorm(PG.val); if (PG.first !== null) PG.first = PG.first & pgMask(); pgRender(); haptic('tap'); }
+  function pgAct(code) { if (code.charAt(0) === 'd') { pgDigit(parseInt(code.slice(1))); return; } switch (code) { case 'ac': pgAc(); break; case 'bs': pgBs(); break; case 'not': pgNot(); break; case 'neg': pgNeg(); break; case '=': pgEq(); break; default: pgOp(code); } }
+  function pgKind(code) { if (code.charAt(0) === 'd') return 'tap'; if (code === 'ac' || code === 'bs') return 'tap'; if (code === '=') return 'eq'; return 'op'; }
+  function pgGroup(s, base) { if (!settings.group) return s; if (base === 10) return groupInt(s); if (base === 2 || base === 16) return groupEvery(s, 4); if (base === 8) return groupEvery(s, 3); return s; }
+  function pgFmtActive() { if (PG.err) return 'Error'; if (PG.base === 10) return pgGroup(pgSigned().toString(10), 10); return pgGroup(PG.val.toString(PG.base).toUpperCase(), PG.base); }
+  function pgBaseFs() { var w = window.innerWidth; return w <= 520 ? 30 : 24; }
+  function pgRender() {
+    pgCap.textContent = BN[PG.base] + ' · U' + PG.word;
+    pgBig.textContent = pgFmtActive(); pgBig.classList.toggle('error', PG.err);
+    fit(pgBig, pgBaseFs(), 12);
+    if (PG.err) { pgSmall.textContent = ''; }
+    else { var parts = []; [10, 16, 8, 2].forEach(function (b) { if (b === PG.base) return; var v = b === 10 ? pgSigned().toString(10) : PG.val.toString(b).toUpperCase(); parts.push(BN[b] + ' ' + v); }); pgSmall.textContent = parts.join('    '); }
+    pgPad.querySelectorAll('.dg').forEach(function (b) { b.classList.toggle('dis', parseInt(b.dataset.c.slice(1)) >= PG.base); });
+    pgTool.querySelectorAll('[data-base]').forEach(function (b) { b.classList.toggle('on', +b.dataset.base === PG.base); });
+    pgTool.querySelectorAll('[data-word]').forEach(function (b) { b.classList.toggle('on', +b.dataset.word === PG.word); });
+    saveState();
+  }
+  pgTool.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; if (b.dataset.base) pgSetBase(+b.dataset.base); else if (b.dataset.word) pgSetWord(+b.dataset.word); });
+  pgPad.addEventListener('pointerdown', function (e) { var b = e.target.closest('.key'); if (b && !b.classList.contains('dis')) ripple(b, e.clientX, e.clientY); });
+  pgPad.addEventListener('click', function (e) { var b = e.target.closest('.key'); if (!b) return; if (b.classList.contains('dis')) { flash(b); haptic('err'); return; } flash(b); pgAct(b.dataset.c); haptic(pgKind(b.dataset.c)); });
+  longPress(pgBig, function () { return PG.err ? 'Error' : pgFmtActive(); });
 
   /* ===== GRAPH ===== */
   var gdrawer = $('#gdrawer'), gExpr = $('#gExpr'), gEq = $('#gEq'), gCanvas = $('#gCanvas'), gRange = $('#gRange'), gCtx = gCanvas.getContext('2d');
@@ -446,22 +578,22 @@
       for (var gyv = Math.ceil(fymin / sy) * sy; gyv <= fymax + 1e-9; gyv += sy) { var py = Y(gyv); x.moveTo(0, py); x.lineTo(w, py); } x.stroke();
       x.strokeStyle = getCSS('--text-dim'); x.lineWidth = 1.2; x.beginPath();
       if (0 >= fymin && 0 <= fymax) { var ay = Y(0); x.moveTo(0, ay); x.lineTo(w, ay); } if (0 >= xmin && 0 <= xmax) { var ax = X(0); x.moveTo(ax, 0); x.lineTo(ax, h); } x.stroke();
-      if (tk) { x.save(); x.beginPath(); x.rect(0, 0, w * prog, h); x.clip(); x.strokeStyle = getCSS('--text'); x.lineWidth = 2; x.lineJoin = 'round'; x.lineCap = 'round'; x.beginPath(); var pen = false, prevY = null; for (var i = 0; i <= N; i++) { var yv = ys[i]; if (!Number.isFinite(yv)) { pen = false; prevY = null; continue; } var px = X(xs[i]), py = Y(yv); if (!pen) { x.moveTo(px, py); pen = true; } else if (prevY !== null && Math.abs(yv - prevY) > (fymax - fymin) * 1.5) { x.moveTo(px, py); } else x.lineTo(px, py); prevY = yv; } x.stroke(); x.restore(); } else { x.fillStyle = getCSS('--text-dim'); x.font = '12px Manrope, sans-serif'; x.textAlign = 'center'; x.fillText('invalid expression', w / 2, h / 2); }
+      if (tk) { x.save(); x.beginPath(); x.rect(0, 0, w * prog, h); x.clip(); x.strokeStyle = getCSS('--accent'); x.lineWidth = 2; x.lineJoin = 'round'; x.lineCap = 'round'; x.beginPath(); var pen = false, prevY = null; for (var i = 0; i <= N; i++) { var yv = ys[i]; if (!Number.isFinite(yv)) { pen = false; prevY = null; continue; } var px = X(xs[i]), py = Y(yv); if (!pen) { x.moveTo(px, py); pen = true; } else if (prevY !== null && Math.abs(yv - prevY) > (fymax - fymin) * 1.5) { x.moveTo(px, py); } else x.lineTo(px, py); prevY = yv; } x.stroke(); x.restore(); } else { x.fillStyle = getCSS('--text-dim'); x.font = '12px Manrope, sans-serif'; x.textAlign = 'center'; x.fillText('invalid expression', w / 2, h / 2); }
     }
     if (animate && !reduceMotion) { var t0 = performance.now(); (function loop(t) { var p = Math.min(1, (t - t0) / 480); draw(ease(p)); if (p < 1) requestAnimationFrame(loop); })(t0); } else draw(1);
     gRange.textContent = 'x ∈ [−' + fmtConv(gHalf) + ', ' + fmtConv(gHalf) + ']';
   }
   function schedulePlot() { clearTimeout(gPlotT); gPlotT = setTimeout(function () { plot(true); saveState(); }, 130); }
-  $('#gChips').addEventListener('click', function (e) { var b = e.target.closest('.gchip'); if (!b) return; var el = gExpr, s = el.selectionStart == null ? el.value.length : el.selectionStart, en = el.selectionEnd == null ? s : el.selectionEnd, ins = b.dataset.gi; el.value = el.value.slice(0, s) + ins + el.value.slice(en); var p = s + ins.length; el.focus(); el.setSelectionRange(p, p); schedulePlot(); });
+  $('#gChips').addEventListener('click', function (e) { var b = e.target.closest('.gchip'); if (!b) return; var el = gExpr, s = el.selectionStart == null ? el.value.length : el.selectionStart, en = el.selectionEnd == null ? s : el.selectionEnd, ins = b.dataset.gi; el.value = el.value.slice(0, s) + ins + el.value.slice(en); var p = s + ins.length; el.focus(); el.setSelectionRange(p, p); schedulePlot(); haptic('tap'); });
   gExpr.addEventListener('input', schedulePlot);
-  $('#gZoomIn').addEventListener('click', function () { gHalf = Math.max(0.5, gHalf / 2); plot(true); saveState(); });
-  $('#gZoomOut').addEventListener('click', function () { gHalf = Math.min(1e4, gHalf * 2); plot(true); saveState(); });
-  $('#gReset').addEventListener('click', function () { gHalf = 10; plot(true); saveState(); });
+  $('#gZoomIn').addEventListener('click', function () { gHalf = Math.max(0.5, gHalf / 2); plot(true); saveState(); haptic('tap'); });
+  $('#gZoomOut').addEventListener('click', function () { gHalf = Math.min(1e4, gHalf * 2); plot(true); saveState(); haptic('tap'); });
+  $('#gReset').addEventListener('click', function () { gHalf = 10; plot(true); saveState(); haptic('tap'); });
   $('#proGraph').addEventListener('click', function () { var o = !sheetOpen(gdrawer); setSheet(gdrawer, o); if (o) setTimeout(function () { plot(true); }, 60); haptic('tap'); });
-  $('#gClose').addEventListener('click', function () { setSheet(gdrawer, false); });
+  $('#gClose').addEventListener('click', function () { setSheet(gdrawer, false); haptic('tap'); });
   gdrawer.addEventListener('click', function (e) { if (e.target.hasAttribute('data-gclose')) setSheet(gdrawer, false); });
 
-  /* ===== pad bindings ===== */
+  /* ===== pad bindings (standard + pro) ===== */
   function bindPad(pad, onTok, resolve, kind) { pad.addEventListener('click', function (e) { var b = e.target.closest('.key'); if (b) onTok(resolve(b)); }); pad.addEventListener('pointerdown', function (e) { var b = e.target.closest('.key'); if (b) ripple(b, e.clientX, e.clientY); }); pad.addEventListener('click', function (e) { var b = e.target.closest('.key'); if (b) { flash(b); haptic(kind(resolve(b))); } }, true); }
   bindPad(sPad, sHandle, function (b) { return b.dataset.key; }, sKind);
   bindPad(proPad, pAct, function (b) { return (P.second && b.hasAttribute('data-sec')) ? b.getAttribute('data-sec') : b.dataset.code; }, pKind);
@@ -471,34 +603,43 @@
   /* ===== keyboard ===== */
   var KT = { '0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '.': '.', '+': '+', '-': '-', '*': '*', '/': '/', 'Enter': '=', '=': '=', 'Escape': 'AC', 'Backspace': 'BS', '%': '%' };
   var PROKMAP = { AC: 'clr', BS: 'bs', '±': 'neg', '=': 'eq' };
+  function flashKey(pad, sel, code) { var b = pad.querySelector(sel); if (!b) return; ripple(b); flash(b); haptic(currentIndex === 0 ? sKind(code) : pKind(code)); }
+  function handleProgKey(e) {
+    var k = e.key, code = null;
+    if (k >= '0' && k <= '9') code = 'd' + k;
+    else { var lk = k.toLowerCase(); if (lk >= 'a' && lk <= 'f') code = 'd' + (lk.charCodeAt(0) - 87); }
+    if (code === null) { if (k === '+') code = '+'; else if (k === '-') code = '-'; else if (k === '*') code = '*'; else if (k === '/') code = '/'; else if (k === '%') code = 'mod'; else if (k === 'Enter' || k === '=') code = '='; else if (k === 'Backspace') code = 'bs'; else if (k === 'Escape') code = 'ac'; else return; }
+    e.preventDefault();
+    var b = pgPad.querySelector('[data-c="' + code + '"]');
+    if (b && b.classList.contains('dis')) { flash(b); haptic('err'); return; }
+    pgAct(code);
+    if (b) { ripple(b); flash(b); }
+    haptic(pgKind(code));
+  }
   window.addEventListener('keydown', function (e) {
     if (sheetStack.length) return;
     if (e.key === 'ArrowLeft') { setIndex(currentIndex - 1, true); e.preventDefault(); return; }
     if (e.key === 'ArrowRight') { setIndex(currentIndex + 1, true); e.preventDefault(); return; }
     var ae = document.activeElement; if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA')) return;
     if (currentIndex === 2) return;
+    if (currentIndex === 3) { handleProgKey(e); return; }
     var tok = KT[e.key]; if (tok == null) return; e.preventDefault();
     if (currentIndex === 0) { sHandle(tok); flashKey(sPad, '[data-key="' + tok + '"]', tok); }
     else { var code = PROKMAP[tok] || tok; pHandle(tok); flashKey(proPad, '[data-code="' + code + '"]', code); }
   });
-  function flashKey(pad, sel, code) { var b = pad.querySelector(sel); if (!b) return; ripple(b); flash(b); haptic(currentIndex === 0 ? sKind(code) : pKind(code)); }
 
   /* ===== install + offline + update ===== */
   var installBtn = $('#install'), plateRight = $('#plateRight'), offPill = $('#offPill'), updPill = $('#updPill');
   var idrawer = $('#idrawer'), deferred = null;
-
   function isStandalone() { try { return ['standalone', 'fullscreen', 'minimal-ui'].some(function (m) { return matchMedia('(display-mode: ' + m + ')').matches; }); } catch (e) { return false; } }
   function showInstall(on) { installBtn.classList.toggle('show', !!on); plateRight.style.display = on ? 'none' : ''; }
-
   (function buildSteps() {
     var steps = ['Open the browser menu.', 'Choose Install app, or Add to Home screen.', 'Confirm. The calculator then opens full-screen, with no browser bars.'];
     $('#iSteps').innerHTML = steps.map(function (s, i) { return '<li><span class="n">' + (i + 1) + '</span><span>' + s + '</span></li>'; }).join('');
     $('#iNote').textContent = 'Installed, the calculator keeps working with no connection. History, memory and settings stay on the device.';
   })();
-
   idrawer.addEventListener('click', function (e) { if (e.target.hasAttribute('data-iclose')) setSheet(idrawer, false); });
   $('#iClose').addEventListener('click', function () { setSheet(idrawer, false); });
-
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; if (!isStandalone()) showInstall(true); });
   installBtn.addEventListener('click', function () {
     haptic('op');
@@ -506,25 +647,16 @@
     setSheet(idrawer, true);
   });
   window.addEventListener('appinstalled', function () { deferred = null; showInstall(false); setSheet(idrawer, false); toast('Installed'); });
-  /* Firefox for Android installs from the menu but never fires the event */
   setTimeout(function () { if (!deferred && !isStandalone()) showInstall(true); }, 2500);
-
   function syncOnline() { offPill.classList.toggle('show', !navigator.onLine); }
   window.addEventListener('online', function () { syncOnline(); toast('Back online'); });
   window.addEventListener('offline', function () { syncOnline(); toast('Offline — running from cache'); });
   syncOnline();
-
   if ('serviceWorker' in navigator && /^http/.test(location.protocol)) {
-    var showUpdate = function (reg) {
-      updPill.classList.add('show');
-      updPill.onclick = function () { if (reg.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' }); };
-    };
+    var showUpdate = function (reg) { updPill.classList.add('show'); updPill.onclick = function () { if (reg.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' }); }; };
     navigator.serviceWorker.register('sw.js').then(function (reg) {
       if (reg.waiting && navigator.serviceWorker.controller) showUpdate(reg);
-      reg.addEventListener('updatefound', function () {
-        var nw = reg.installing; if (!nw) return;
-        nw.addEventListener('statechange', function () { if (nw.state === 'installed' && navigator.serviceWorker.controller) showUpdate(reg); });
-      });
+      reg.addEventListener('updatefound', function () { var nw = reg.installing; if (!nw) return; nw.addEventListener('statechange', function () { if (nw.state === 'installed' && navigator.serviceWorker.controller) showUpdate(reg); }); });
     }).catch(function () {});
     var reloading = false;
     navigator.serviceWorker.addEventListener('controllerchange', function () { if (reloading) return; reloading = true; location.reload(); });
@@ -533,18 +665,19 @@
   /* ===== restore + init ===== */
   if (saved) {
     if (saved.s && typeof saved.s.entry === 'string') { S.entry = saved.s.entry; S.expr = typeof saved.s.expr === 'string' ? saved.s.expr : ''; }
-    if (saved.p && Array.isArray(saved.p.tokens)) { P.tokens = saved.p.tokens; P.buf = typeof saved.p.buf === 'string' ? saved.p.buf : null; P.done = !!saved.p.done; P.result = typeof saved.p.result === 'string' ? saved.p.result : '0'; P.lastExpr = typeof saved.p.lastExpr === 'string' ? saved.p.lastExpr : ''; P.mem = typeof saved.p.mem === 'number' ? saved.p.mem : 0; P.angle = saved.p.angle === 'RAD' ? 'RAD' : 'DEG'; P.hist = Array.isArray(saved.p.hist) ? saved.p.hist : []; }
+    if (saved.p && Array.isArray(saved.p.tokens)) { P.tokens = saved.p.tokens; P.buf = typeof saved.p.buf === 'string' ? saved.p.buf : null; P.done = !!saved.p.done; P.result = typeof saved.p.result === 'string' ? saved.p.result : '0'; P.lastExpr = typeof saved.p.lastExpr === 'string' ? saved.p.lastExpr : ''; P.mem = typeof saved.p.mem === 'number' ? saved.p.mem : 0; P.angle = saved.p.angle === 'RAD' ? 'RAD' : 'DEG'; P.hist = Array.isArray(saved.p.hist) ? saved.p.hist : []; P.ans = typeof saved.p.ans === 'string' ? saved.p.ans : null; }
     if (saved.conv && typeof saved.conv.cat === 'string') { conv.cat = saved.conv.cat; conv.from = typeof saved.conv.from === 'string' ? saved.conv.from : conv.from; conv.to = typeof saved.conv.to === 'string' ? saved.conv.to : conv.to; conv.val = typeof saved.conv.val === 'string' ? saved.conv.val : '1'; }
     if (typeof saved.g === 'string' && saved.g) gExpr.value = saved.g;
+    if (saved.pg) { try { PG.val = BigInt(saved.pg.val || '0'); } catch (e) { PG.val = 0n; } PG.base = [2, 8, 10, 16].indexOf(saved.pg.base) !== -1 ? saved.pg.base : 10; PG.word = [8, 16, 32].indexOf(saved.pg.word) !== -1 ? saved.pg.word : 32; PG.err = !!saved.pg.err; }
   }
   proAngle.textContent = P.angle; proAngle.classList.toggle('on', P.angle === 'RAD');
   buildChips(); buildConst();
   if (CATS[conv.cat]) buildSelects(); else { conv.cat = 'length'; buildSelects(); }
-  var allKeys = document.querySelectorAll('.key'); for (var i = 0; i < allKeys.length; i++) allKeys[i].style.animationDelay = (90 + i * 12) + 'ms';
-  function fitAll() { fit(sVal, parseFloat(getComputedStyle(root).getPropertyValue('--val-fs')) || 46, 22); pRender(); renderConv(); }
-  var qMode = (function () { try { var m = new URLSearchParams(location.search).get('mode'); return m === 'pro' ? 1 : m === 'convert' ? 2 : m === 'standard' ? 0 : null; } catch (e) { return null; } })();
-  setIndex(qMode != null ? qMode : (saved && (saved.mode === 1 || saved.mode === 2) ? saved.mode : 0), false);
-  sRender(false); renderHist(); pRender(); renderConv();
+  var allKeys = document.querySelectorAll('.key'); for (var i = 0; i < allKeys.length; i++) allKeys[i].style.animationDelay = (90 + i * 10) + 'ms';
+  function fitAll() { fit(sVal, parseFloat(getComputedStyle(root).getPropertyValue('--val-fs')) || 46, 22); pRender(); renderConv(); pgRender(); }
+  var qMode = (function () { try { var m = new URLSearchParams(location.search).get('mode'); return m === 'pro' ? 1 : m === 'convert' ? 2 : m === 'prog' ? 3 : m === 'standard' ? 0 : null; } catch (e) { return null; } })();
+  setIndex(qMode != null ? qMode : (saved && saved.mode >= 0 && saved.mode <= 3 ? saved.mode : 0), false);
+  sRender(false); renderHist(); pRender(); renderConv(); pgRender();
   try { if (!sessionStorage.getItem('calc-hint')) { setTimeout(function () { applyTransform(-16, false); setTimeout(function () { setIndex(0, true); }, 260); sessionStorage.setItem('calc-hint', '1'); }, 900); } } catch (e) {}
 })();
 </script>
