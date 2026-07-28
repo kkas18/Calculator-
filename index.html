@@ -51,7 +51,7 @@
   .theme{display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid var(--border);border-radius:11px;background:var(--btn-fn);color:var(--text);cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1),background-color .3s,border-color .45s,color .45s}
   .theme:hover{background:var(--btn-op);transform:rotate(14deg)}.theme:active{transform:rotate(-8deg) scale(.92)}.theme:focus{outline:none}.theme:focus-visible{outline:2px solid var(--focus);outline-offset:2px}.theme svg{width:17px;height:17px}
   html[data-theme="light"] .icon-sun{display:none}html[data-theme="light"] .icon-moon{display:block}html[data-theme="dark"] .icon-sun{display:block}html[data-theme="dark"] .icon-moon{display:none}
-  .moderail{flex:none;position:relative;display:flex;width:252px;margin:0 auto 12px;padding:3px;background:var(--btn-fn);border:1px solid var(--border);border-radius:12px;transition:background-color .45s,border-color .45s}
+  .moderail{flex:none;position:relative;display:flex;width:auto;margin:0 0 12px;padding:3px;background:var(--btn-fn);border:1px solid var(--border);border-radius:12px;transition:background-color .45s,border-color .45s}
   .seg{position:relative;z-index:1;flex:1 1 0;border:0;background:transparent;padding:7px 4px;border-radius:9px;font:600 11.5px/1 'Manrope';letter-spacing:.01em;color:var(--text-dim);cursor:pointer;transition:color .3s}
   .seg.on{color:var(--btn-eq-text)}.seg:focus{outline:none}.seg:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
   .seg-ind{position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px)/3);border-radius:9px;background:var(--btn-eq);transform:translateX(0);transition:transform .42s cubic-bezier(.2,.8,.2,1),background-color .45s;z-index:0}
@@ -63,12 +63,17 @@
   .expr{min-height:16px;line-height:16px;text-align:right;font-size:13px;font-weight:500;letter-spacing:.03em;color:var(--text-dim);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .45s}
   .value{display:flex;align-items:flex-end;justify-content:flex-end;min-height:48px;padding:8px 0 2px;text-align:right;font-family:'Fraunces',serif;font-weight:300;font-size:var(--val-fs);line-height:1.02;letter-spacing:-.01em;color:var(--text);font-optical-sizing:auto;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;overflow:hidden;-webkit-touch-callout:none;cursor:default;transition:color .45s}
   .value.error{font-style:italic;opacity:.65}
-  .ptool{flex:none;display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
-  .pill{flex:1 1 0;height:27px;min-width:34px;border:1px solid var(--border);border-radius:9px;background:var(--btn-fn);color:var(--text-dim);font:600 10px/1 'Manrope';letter-spacing:.03em;cursor:pointer;transition:background-color .3s,color .3s,border-color .45s}
-  .pill:focus{outline:none}.pill:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
-  .pill.on{background:var(--btn-eq);color:var(--btn-eq-text);border-color:transparent}
-  .pill.deg{flex:0 0 auto;padding:0 9px}.pill.icon{flex:0 0 27px;display:grid;place-items:center}.pill.icon svg{width:14px;height:14px}
+  /* pro control strip — one cohesive bar, hairline dividers, full-strength ink */
+  .ptool{flex:none;position:relative;display:flex;align-items:center;gap:0;margin:0 0 12px;padding:3px;border:1px solid var(--border);border-radius:12px;background:var(--btn-fn);transition:background-color .45s,border-color .45s}
+  .pill{position:relative;flex:1 1 0;height:30px;min-width:0;border:0;border-radius:9px;background:transparent;color:var(--text);font:600 10.5px/1 'Manrope';letter-spacing:.02em;cursor:pointer;transition:background-color .3s,color .3s}
+  .pill + .pill::before{content:"";position:absolute;left:0;top:24%;bottom:24%;width:1px;background:var(--border);transition:opacity .3s}
+  .pill:focus{outline:none}.pill:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+  .pill.on{background:var(--btn-eq);color:var(--btn-eq-text)}
+  .pill.on + .pill::before,.pill + .pill.on::before{opacity:0}
+  .pill.deg{flex:0 0 auto;padding:0 11px}.pill.icon{flex:0 0 33px;display:grid;place-items:center}.pill.icon svg{width:15px;height:15px}
   .pdisp{flex:1 1 auto;position:relative;min-height:70px;display:flex;flex-direction:column;justify-content:flex-end;padding:2px 2px 14px;margin-bottom:14px;border-bottom:1px solid var(--border);transition:border-color .45s}
+  .pcap{position:absolute;top:2px;left:2px;font:600 9px/1 'Manrope';letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);opacity:.85;transition:color .45s}
+  .panel.pro .pdisp{border-bottom:0;margin-bottom:10px}
   .mbadge{position:absolute;top:0;right:2px;font:700 10px/1 'Manrope';letter-spacing:.08em;color:var(--text-dim);opacity:0;transition:opacity .3s}.mbadge.on{opacity:1}
   .pbig{display:flex;align-items:flex-end;justify-content:flex-end;min-height:32px;text-align:right;font-family:'Fraunces',serif;font-weight:400;font-size:30px;line-height:1.05;letter-spacing:-.01em;color:var(--text);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;overflow:hidden;-webkit-touch-callout:none;cursor:default;transition:color .45s}
   .pbig.error{font-style:italic;opacity:.65}
@@ -137,7 +142,7 @@
   .grange{flex:1 1 auto;text-align:center;font:500 11px/1 'Manrope';letter-spacing:.03em;color:var(--text-dim);font-variant-numeric:tabular-nums}
   #gCanvas{width:100%;height:178px;display:block;border:1px solid var(--border);border-radius:14px;background:var(--btn)}
   .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 26px);transform:translate(-50%,12px);z-index:9;padding:9px 16px;border-radius:999px;background:var(--text);color:var(--surface);font-size:12px;font-weight:600;letter-spacing:.04em;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s cubic-bezier(.2,.8,.2,1)}.toast.show{opacity:1;transform:translate(-50%,0)}
-  @media (max-width:520px){body{align-items:stretch;padding:calc(env(safe-area-inset-top,0px) + 12px) calc(env(safe-area-inset-right,0px) + 12px) calc(env(safe-area-inset-bottom,0px) + 12px) calc(env(safe-area-inset-left,0px) + 12px)}.stage{width:100%;max-width:440px;margin:0 auto;display:flex}.calc{flex:1;--card-r:26px;--pad-x:16px;--gap:11px;--key-h:58px;--val-fs:60px}.panel.pro .pad{--key-h:47px;--gap:8px}.display{min-height:90px}.pbig{font-size:32px}}
+  @media (max-width:520px){body{align-items:stretch;padding:calc(env(safe-area-inset-top,0px) + 12px) calc(env(safe-area-inset-right,0px) + 12px) calc(env(safe-area-inset-bottom,0px) + 12px) calc(env(safe-area-inset-left,0px) + 12px)}.stage{width:100%;max-width:440px;margin:0 auto;display:flex}.calc{flex:1;--card-r:26px;--pad-x:16px;--gap:11px;--key-h:58px;--val-fs:60px}.panel.pro .pad{--key-h:47px;--gap:8px}.display{min-height:90px}.pbig{font-size:32px}.pill{height:34px}}
   @media (max-height:620px){.calc{--key-h:42px;--gap:8px;--card-r:20px;padding:10px 12px 8px}.panel.pro .pad{--key-h:37px;--gap:6px}.top{padding-bottom:8px}.moderail{margin-bottom:8px}.display{min-height:50px;padding-bottom:8px;margin-bottom:8px;--val-fs:34px}.pdisp{min-height:52px;padding-bottom:8px;margin-bottom:8px}.pbig{font-size:25px}.ptool{margin-bottom:7px}.plate{margin-top:8px;padding-top:6px}}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
@@ -179,6 +184,7 @@
           </section>
 
           <section class="panel pro" role="tabpanel" aria-label="Professional calculator">
+            <div class="pdisp"><span class="pcap">Scientific</span><span class="mbadge" id="proM">M</span><div class="pbig" id="proBig" role="status" aria-live="polite" title="Hold to copy">0</div><div class="psmall" id="proSmall" aria-hidden="true"></div></div>
             <div class="ptool">
               <button class="pill deg" id="proAngle" type="button">DEG</button>
               <button class="pill pm" data-m="mc" type="button">MC</button><button class="pill pm" data-m="mr" type="button">MR</button>
@@ -186,7 +192,6 @@
               <button class="pill icon" id="proGraph" type="button" aria-label="Graph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c4 0 4-11 8-11s4 7 10 7"/></svg></button>
               <button class="pill icon" id="proHist" type="button" aria-label="History"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
             </div>
-            <div class="pdisp"><span class="mbadge" id="proM">M</span><div class="pbig" id="proBig" role="status" aria-live="polite" title="Hold to copy">0</div><div class="psmall" id="proSmall" aria-hidden="true"></div></div>
             <div class="pad" id="proPad"></div>
           </section>
 
@@ -390,7 +395,8 @@
   proAngle.addEventListener('click', toggleAngle);
   proHist.addEventListener('click', function () { toggleDrawer(); haptic('tap'); });
   proPad.querySelectorAll('.pm').forEach(function (b) { b.addEventListener('click', function () { pMem(b.dataset.m); haptic('op'); }); });
-  function pRender() { var big, small; if (P.done) { big = fmtDisp(P.result); small = P.lastExpr ? P.lastExpr + ' =' : ''; } else { big = pretty(true); var pv = preview(); small = pv !== null ? '= ' + fmtDisp(numToStr(pv)) : ''; } proBig.textContent = big; proSmall.textContent = small; proBig.classList.toggle('error', P.result === 'Error' && P.done); fit(proBig, 30, 13); var clr = proPad.querySelector('[data-code="clr"]'); if (clr) clr.querySelector('.klabel').textContent = P.buf !== null ? 'C' : 'AC'; proM.classList.toggle('on', P.mem !== 0); if (proBig.animate && P.done) proBig.animate([{ opacity: .4, transform: 'translateY(3px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 170, easing: 'cubic-bezier(.2,.8,.2,1)' }); saveState(); }
+  function proBase(){var w=window.innerWidth,h=window.innerHeight;if(h<=620)return 24;return w<=360?34:w<=520?40:32;}
+  function pRender() { var big, small; if (P.done) { big = fmtDisp(P.result); small = P.lastExpr ? P.lastExpr + ' =' : ''; } else { big = pretty(true); var pv = preview(); small = pv !== null ? '= ' + fmtDisp(numToStr(pv)) : ''; } proBig.textContent = big; proSmall.textContent = small; proBig.classList.toggle('error', P.result === 'Error' && P.done); fit(proBig, proBase(), 14); var clr = proPad.querySelector('[data-code="clr"]'); if (clr) clr.querySelector('.klabel').textContent = P.buf !== null ? 'C' : 'AC'; proM.classList.toggle('on', P.mem !== 0); if (proBig.animate && P.done) proBig.animate([{ opacity: .4, transform: 'translateY(3px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 170, easing: 'cubic-bezier(.2,.8,.2,1)' }); saveState(); }
 
   /* ===== CONVERT ===== */
   var convChips = $('#convChips'), convCard = $('#convCard'), cFrom = $('#cFrom'), cTo = $('#cTo'), cVal = $('#cVal'), cOut = $('#cOut'), cRel = $('#cRel'), cSwap = $('#cSwap'), constList = $('#constList');
