@@ -76,7 +76,7 @@
   .mpop-dot{flex:none;width:9px;height:9px;border-radius:50%;background:var(--d)}
   .mpop-item .mk{margin-left:auto;color:var(--text-dim);opacity:0;transition:opacity .2s}.mpop-item.on .mk{opacity:1}
   .deck{flex:1 1 auto;position:relative;overflow:hidden;min-height:0;margin-top:14px;touch-action:pan-y}
-  .track{display:flex;width:400%;height:100%;transition:transform .42s cubic-bezier(.2,.8,.2,1);will-change:transform}
+  .track{display:flex;width:400%;height:100%;transition:transform .32s cubic-bezier(.22,.61,.36,1);will-change:transform}
   .track.dragging{transition:none}
   .panel{width:25%;flex:none;display:flex;flex-direction:column;min-height:0;padding:0 1px}
   .display{flex:1 1 auto;min-height:84px;display:flex;flex-direction:column;justify-content:flex-end;padding:4px 2px 14px;margin-bottom:14px;border-bottom:1px solid var(--border);transition:border-color .45s}
@@ -142,7 +142,7 @@
   .panel.prog .key{font-size:15px}
   .ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.16;transform:scale(0);pointer-events:none;animation:rip .55s ease-out forwards}@keyframes rip{to{transform:scale(2.4);opacity:0}}
   /* ===== CONVERT — instrument-grade ===== */
-  .chips{flex:none;display:flex;gap:8px;overflow-x:auto;padding:2px 2px 14px;margin:0 -2px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+  .chips{flex:none;display:flex;gap:8px;overflow-x:auto;padding:2px 2px 14px;margin:0 -2px;scrollbar-width:none;touch-action:pan-y;-webkit-user-select:none;user-select:none;cursor:grab}.chips::-webkit-scrollbar{display:none}.chips:active{cursor:grabbing}
   .chip{flex:none;display:inline-flex;align-items:center;gap:7px;height:33px;padding:0 14px;border:1px solid var(--border);border-radius:999px;background:var(--btn-fn);color:var(--text-dim);font:600 11.5px/1 'Manrope';letter-spacing:.02em;cursor:pointer;transition:background-color .3s,color .3s,border-color .45s,transform .12s;animation:cpop .42s cubic-bezier(.2,.8,.2,1) backwards}
   .chip svg{width:14px;height:14px;opacity:.7;transition:opacity .3s}
   .chip:hover{color:var(--text);transform:translateY(-1px)}
@@ -488,6 +488,7 @@
   window.addEventListener('popstate', function () { if (sheetStack.length) closeTop(); });
   window.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (sheetStack.length) { e.preventDefault(); setSheet(sheetStack[sheetStack.length - 1], false); } else if (popOpen) { e.preventDefault(); closePopover(); } } });
 
+  /* pager + header mode identity */
   var deck = $('#deck'), track = $('#track'), mnTxt = $('#mnTxt'), mnBtn = $('#modenameBtn'), modepop = $('#modepop'), logoSvg = $('.logo svg');
   var currentIndex = 0, suppressClick = false, popOpen = false;
   function applyTransform(extra, animate) { track.classList.toggle('dragging', !animate); track.style.transform = 'translateX(' + (-currentIndex * deck.clientWidth + (extra || 0)) + 'px)'; }
@@ -518,10 +519,44 @@
   document.addEventListener('pointerdown', function (e) { if (!popOpen) return; if (e.target.closest('#modepop') || e.target.closest('#modenameBtn')) return; closePopover(); });
   buildPopover();
 
+  /* ===== responsive swipe: arbitrate tap / vertical / horizontal from anywhere ===== */
   var drag = null;
-  deck.addEventListener('pointerdown', function (e) { if (e.target.closest('button,input,select,canvas,.value,.pbig,.drawer,.chip,.ccard,.ctl,.gchip,.gbtn,.sw,.pgrow,.pcap-btn,.pghist')) return; drag = { x: e.clientX, y: e.clientY, t: e.timeStamp, lx: e.clientX, lt: e.timeStamp, axis: null, on: false }; window.addEventListener('pointermove', onMove, { passive: false }); window.addEventListener('pointerup', onUp); });
-  function onMove(e) { if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (!drag.axis) { if (Math.max(Math.abs(dx), Math.abs(dy)) < 6) return; drag.axis = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v'; if (drag.axis === 'v') { drag = null; window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); return; } drag.on = true; } e.preventDefault(); var r = dx; if (currentIndex === 0 && dx > 0) r = dx * 0.3; else if (currentIndex === 3 && dx < 0) r = dx * 0.3; drag.lx = e.clientX; drag.lt = e.timeStamp; applyTransform(r, false); }
-  function onUp(e) { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); if (!drag) return; if (drag.on) { var dx = e.clientX - drag.x, w = deck.clientWidth, dt = Math.max(1, e.timeStamp - drag.lt), v = (e.clientX - drag.lx) / dt, next = currentIndex; if (dx < -w * 0.16 || v < -0.4) next = currentIndex + 1; else if (dx > w * 0.16 || v > 0.4) next = currentIndex - 1; suppressClick = true; setIndex(next, true); } drag = null; }
+  function cleanupDrag() { if (!drag) return; window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); window.removeEventListener('pointercancel', onCancel); drag = null; }
+  function onCancel() { cleanupDrag(); }
+  function onMove(e) {
+    if (!drag) return;
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.axis) {
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < 5) return;          /* tiny dead-zone, then commit */
+      drag.axis = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+      if (drag.axis === 'v') { cleanupDrag(); return; }               /* hand vertical back to native scroll */
+      drag.on = true;
+      if (drag.origin) { var o = drag.origin.closest('.key,.ccard'); if (o) { var rs = o.querySelectorAll('.ripple'); for (var i = 0; i < rs.length; i++) rs[i].remove(); } } /* kill stray press-ripple */
+    }
+    e.preventDefault();
+    var r = dx;
+    if (currentIndex === 0 && dx > 0) r = dx * 0.35; else if (currentIndex === 3 && dx < 0) r = dx * 0.35;  /* edge rubber-band */
+    drag.lx = e.clientX; drag.lt = e.timeStamp;
+    applyTransform(r, false);                                          /* 1:1 follow, no transition */
+  }
+  function onUp(e) {
+    window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); window.removeEventListener('pointercancel', onCancel);
+    if (!drag) return;
+    if (drag.on) {
+      var dx = e.clientX - drag.x, w = drag.w || deck.clientWidth, dt = Math.max(1, e.timeStamp - drag.lt), v = (e.clientX - drag.lx) / dt, next = currentIndex;
+      if (dx < -w * 0.12 || v < -0.3) next = currentIndex + 1;          /* distance OR velocity flips the page */
+      else if (dx > w * 0.12 || v > 0.3) next = currentIndex - 1;
+      suppressClick = true; setIndex(next, true);
+    }
+    drag = null;
+  }
+  deck.addEventListener('pointerdown', function (e) {
+    if (e.target.closest('input,select,canvas,.chips,.drawer')) return; /* only genuine own-controls are excluded */
+    drag = { x: e.clientX, y: e.clientY, t: e.timeStamp, lx: e.clientX, lt: e.timeStamp, axis: null, on: false, w: deck.clientWidth, origin: e.target };
+    window.addEventListener('pointermove', onMove, { passive: false });
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onCancel);
+  });
   deck.addEventListener('click', function (e) { if (suppressClick) { e.preventDefault(); e.stopPropagation(); suppressClick = false; } }, true);
   window.addEventListener('resize', function () { applyTransform(0, false); fitAll(); if (sheetOpen(gdrawer)) plot(false); });
 
@@ -694,7 +729,13 @@
     saveState();
   }
   function setCat(k) { conv.cat = k; convMin = convMax = null; if (k !== 'const') { var u = Object.keys(CATS[k].units); if (u.indexOf(conv.from) === -1) conv.from = u[0]; if (u.indexOf(conv.to) === -1) conv.to = u[1] || u[0]; buildSelects(); } buildChips(); renderConv(true); if (!reduceMotion && convCard.animate) convCard.animate([{ opacity: .4, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }); }
-  convChips.addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (b) { setCat(b.dataset.cat); haptic('tap'); } });
+  /* chip rail: driven by JS so it scrolls under the deck's pan-y rule, without stealing the page-swipe */
+  var chipDrag = null, chipClickSuppress = false;
+  convChips.addEventListener('pointerdown', function (e) { chipClickSuppress = false; chipDrag = { x: e.clientX, sl: convChips.scrollLeft, moved: false }; });
+  window.addEventListener('pointermove', function (e) { if (!chipDrag) return; var dx = e.clientX - chipDrag.x; if (!chipDrag.moved && Math.abs(dx) < 3) return; chipDrag.moved = true; convChips.scrollLeft = chipDrag.sl - dx; });
+  window.addEventListener('pointerup', function () { if (!chipDrag) return; if (chipDrag.moved) chipClickSuppress = true; chipDrag = null; });
+  window.addEventListener('pointercancel', function () { chipDrag = null; });
+  convChips.addEventListener('click', function (e) { if (chipClickSuppress) { chipClickSuppress = false; return; } var b = e.target.closest('.chip'); if (b) { setCat(b.dataset.cat); haptic('tap'); } });
   constList.addEventListener('click', function (e) { var b = e.target.closest('.ccard'); if (b) { ripple(b, e.clientX, e.clientY); copyText(b.dataset.v); } });
   cVal.addEventListener('input', function () { conv.val = cVal.value; renderConv(false); });
   cFrom.addEventListener('change', function () { conv.from = cFrom.value; convMin = convMax = null; renderConv(true); haptic('tap'); });
