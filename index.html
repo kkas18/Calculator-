@@ -519,43 +519,54 @@
   document.addEventListener('pointerdown', function (e) { if (!popOpen) return; if (e.target.closest('#modepop') || e.target.closest('#modenameBtn')) return; closePopover(); });
   buildPopover();
 
-  /* ===== responsive swipe: arbitrate tap / vertical / horizontal from anywhere ===== */
+  /* ===== responsive swipe: freeze-then-arbitrate, continuous in BOTH directions =====
+     The track is frozen statically the instant the finger lands, so a new swipe can
+     never fight an animation left running by the previous one. Direction is decided
+     once (tap / vertical / horizontal); horizontal follows 1:1; release flips the page
+     on distance OR velocity, clamped to [0..3] so you can chain swipes freely. ===== */
   var drag = null;
-  function cleanupDrag() { if (!drag) return; window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); window.removeEventListener('pointercancel', onCancel); drag = null; }
-  function onCancel() { cleanupDrag(); }
+  function endDrag() {
+    if (!drag) return;
+    window.removeEventListener('pointermove', onMove);
+    window.removeEventListener('pointerup', onUp);
+    window.removeEventListener('pointercancel', onUp);
+    drag = null;
+  }
   function onMove(e) {
     if (!drag) return;
     var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (!drag.axis) {
-      if (Math.max(Math.abs(dx), Math.abs(dy)) < 5) return;          /* tiny dead-zone, then commit */
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;            /* small dead-zone, then commit */
       drag.axis = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
-      if (drag.axis === 'v') { cleanupDrag(); return; }               /* hand vertical back to native scroll */
+      if (drag.axis === 'v') { endDrag(); return; }                 /* hand vertical back to native scroll */
       drag.on = true;
-      if (drag.origin) { var o = drag.origin.closest('.key,.ccard'); if (o) { var rs = o.querySelectorAll('.ripple'); for (var i = 0; i < rs.length; i++) rs[i].remove(); } } /* kill stray press-ripple */
+      if (drag.origin && drag.origin.closest) { var o = drag.origin.closest('.key,.ccard'); if (o) { var rs = o.querySelectorAll('.ripple'); for (var i = 0; i < rs.length; i++) rs[i].remove(); o.classList.remove('press'); } }
     }
+    if (drag.axis !== 'h') return;
     e.preventDefault();
     var r = dx;
     if (currentIndex === 0 && dx > 0) r = dx * 0.35; else if (currentIndex === 3 && dx < 0) r = dx * 0.35;  /* edge rubber-band */
     drag.lx = e.clientX; drag.lt = e.timeStamp;
-    applyTransform(r, false);                                          /* 1:1 follow, no transition */
+    applyTransform(r, false);                                       /* 1:1 follow, transition off */
   }
   function onUp(e) {
-    window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); window.removeEventListener('pointercancel', onCancel);
     if (!drag) return;
-    if (drag.on) {
-      var dx = e.clientX - drag.x, w = drag.w || deck.clientWidth, dt = Math.max(1, e.timeStamp - drag.lt), v = (e.clientX - drag.lx) / dt, next = currentIndex;
-      if (dx < -w * 0.12 || v < -0.3) next = currentIndex + 1;          /* distance OR velocity flips the page */
-      else if (dx > w * 0.12 || v > 0.3) next = currentIndex - 1;
-      suppressClick = true; setIndex(next, true);
-    }
-    drag = null;
+    var wasOn = drag.on, w = drag.w, dx = e.clientX - drag.x, dt = Math.max(1, e.timeStamp - drag.lt), v = (e.clientX - drag.lx) / dt;
+    endDrag();
+    if (!wasOn) return;
+    var next = currentIndex;
+    if (dx < -w * 0.12 || v < -0.3) next = currentIndex + 1;        /* distance OR velocity advances */
+    else if (dx > w * 0.12 || v > 0.3) next = currentIndex - 1;
+    next = Math.max(0, Math.min(3, next));                          /* never fall off the ends */
+    suppressClick = true; setIndex(next, true);
   }
   deck.addEventListener('pointerdown', function (e) {
-    if (e.target.closest('input,select,canvas,.chips,.drawer')) return; /* only genuine own-controls are excluded */
-    drag = { x: e.clientX, y: e.clientY, t: e.timeStamp, lx: e.clientX, lt: e.timeStamp, axis: null, on: false, w: deck.clientWidth, origin: e.target };
+    if (e.target.closest('input,select,canvas,.chips,.drawer')) return;
+    applyTransform(0, false);                                       /* freeze track statically at the current panel */
+    drag = { x: e.clientX, y: e.clientY, lx: e.clientX, lt: e.timeStamp, axis: null, on: false, w: deck.clientWidth || 1, origin: e.target };
     window.addEventListener('pointermove', onMove, { passive: false });
     window.addEventListener('pointerup', onUp);
-    window.addEventListener('pointercancel', onCancel);
+    window.addEventListener('pointercancel', onUp);
   });
   deck.addEventListener('click', function (e) { if (suppressClick) { e.preventDefault(); e.stopPropagation(); suppressClick = false; } }, true);
   window.addEventListener('resize', function () { applyTransform(0, false); fitAll(); if (sheetOpen(gdrawer)) plot(false); });
